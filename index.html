@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Room</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f5f5f5;
+    }
+    #join-container {
+      max-width: 500px;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    #room-link {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+<body>
+  <div id="join-container">
+    <h4>Join Room: <span id="room-title"></span></h4>
+    <div id="room-link"></div><br/>
+    <a id="download-link" class="waves-effect waves-light btn modal-trigger" target="_blank" href="#modal1">Get Keet</a> 
+    <a id="join-link" class="waves-effect waves-light btn" target="_blank" href="#">Join room with Keet</a>
+  </div>
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Join Room with Keet</h4>
+      <p>Please download the Keet app to join the room.</p>
+      <div id="download-options"></div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var urlParams = new URLSearchParams(window.location.search);
+      var key = urlParams.get('key') || 'yry7g7wa7bmrjd1xxr7ce64581ij3hozq7589xfgxjrm74kgp34o36pwp46ohw4u1w63o6is6sax6j3swgdi66dmti8p8nfuyypfwewbuy';
+      var title = urlParams.get('title') || 'Pear Community';
+      var joinLink = 'pear://keet/' + key;
+
+      document.getElementById('room-title').textContent = title;
+      document.getElementById('room-link').textContent = joinLink
+      document.getElementById('join-link').href = joinLink;
+      
+      var downloadBtn = document.getElementById('download-link');
+      downloadBtn.addEventListener('click', function() {
+        checkOS();
+      });
+
+      function checkOS() {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        var downloadOptions = document.getElementById('download-options');
+
+        if (/windows/i.test(userAgent)) {
+          downloadOptions.innerHTML = '<a class="waves-effect waves-light btn" href="https://keet.io/downloads/2.0.0/Keet.msi">Get Keet for Windows</a>';
+        } else if (/macintosh|mac os x/i.test(userAgent)) {
+          downloadOptions.innerHTML = '<a class="waves-effect waves-light btn" href="https://keet.io/downloads/2.0.0/Keet-Apple-Silicon.dmg">Get Keet for Apple Silicon</a>';
+        } else if (/android/i.test(userAgent)) {
+          downloadOptions.innerHTML = '<a class="waves-effect waves-light btn" href="https://play.google.com/store/apps/details?id=io.keet.app">Get Keet from Play Store</a>';
+        } else if (/iPad|iPhone|iPod/i.test(userAgent)) {
+          downloadOptions.innerHTML = '<a class="waves-effect waves-light btn" href="https://apps.apple.com/us/app/keet-by-holepunch/id6443880549">Get Keet from App Store</a>';
+        } else {
+          downloadOptions.innerHTML = '<a class="waves-effect waves-light btn" href="https://keet.io/downloads/2.0.0/Keet-x64.tar.gz">Get Keet for x86 Linux</a>';
+        }
+      }
+
+      var elems = document.querySelectorAll('.modal');
+      var instances = M.Modal.init(elems);
+    });
+  </script>
+</body>
+</html>
