@@ -79,9 +79,18 @@
   <script src="lib/qrcode.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Parse anchor to get key and title in order
+      var anchor = window.location.hash.substring(1);
+      if (anchor) {
+        var parts = anchor.split('&');
+        var anchorKey = parts[0].split('=')[1];
+        var anchorTitle = parts[1].split('=')[1];
+        anchorTitle = anchorTitle && decodeURIComponent(anchorTitle)
+      }
+
       var urlParams = new URLSearchParams(window.location.search);
-      var key = urlParams.get('key') || 'yry7g7wa7bmrjd1xxr7ce64581ij3hozq7589xfgxjrm74kgp34o36pwp46ohw4u1w63o6is6sax6j3swgdi66dmti8p8nfuyypfwewbuy';
-      var title = urlParams.get('title') || 'Pear Community';
+      var key = anchorKey || urlParams.get('key') || 'yry7g7wa7bmrjd1xxr7ce64581ij3hozq7589xfgxjrm74kgp34o36pwp46ohw4u1w63o6is6sax6j3swgdi66dmti8p8nfuyypfwewbuy';
+      var title = anchorTitle || urlParams.get('title') || 'Pear Community';
       var joinLink = 'pear://keet/' + key;
 
       document.getElementById('room-title').textContent = title;
