@@ -100,7 +100,9 @@
 
       function checkOS() {
         var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
+        if (!(/windows|macintosh|mac os x|android|iPad|iPhone|iPod/i.test(userAgent))) {
+          downloadBtn.innerHTML = '<a href="https://keet.io">Get App from Keet.io</a>';
+        }
         if (/windows/i.test(userAgent)) {
           downloadBtn.innerHTML = '<a href="https://keet.io/downloads/2.0.0/Keet.msi">Get Keet for Windows</a>';
         } else if (/macintosh|mac os x/i.test(userAgent)) {
