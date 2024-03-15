@@ -53,8 +53,12 @@
     <div class="center-align" id="qrcode"></div>
     <div class="center-align" id="room-link"></div><br/>
     <div class="center-align">
-        <a id="download-link" class="cyan accent-4 waves-effect waves-light btn modal-trigger" target="_blank" href="#modal1">Get Keet</a> 
         <a id="join-link" class="cyan accent-4 waves-effect waves-light btn" target="_blank" href="#">Join room with Keet</a>
+    </div>
+    <br/>
+    <div class="center-align">
+      <text>Haven't installed Keet?</text>
+      <a id="download-link" href="#">Get Keet</a>
     </div>
 
     <div id="legal-note">
@@ -92,24 +96,21 @@
       });
 
       var downloadBtn = document.getElementById('download-link');
-      downloadBtn.addEventListener('click', function() {
-        checkOS();
-      });
+      checkOS();
 
       function checkOS() {
         var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        var downloadOptions = document.getElementById('download-options');
 
         if (/windows/i.test(userAgent)) {
-          downloadOptions.innerHTML = '<a class="cyan accent-4 waves-effect waves-light btn" href="https://keet.io/downloads/2.0.0/Keet.msi">Get Keet for Windows</a>';
+          downloadBtn.innerHTML = '<a href="https://keet.io/downloads/2.0.0/Keet.msi">Get Keet for Windows</a>';
         } else if (/macintosh|mac os x/i.test(userAgent)) {
-          downloadOptions.innerHTML = '<a class="cyan accent-4 waves-effect waves-light btn" href="https://keet.io/downloads/2.0.0/Keet-Apple-Silicon.dmg">Get Keet for Apple Silicon</a>';
+          downloadBtn.innerHTML = '<a href="https://keet.io/downloads/2.0.0/Keet-Apple-Silicon.dmg">Get Keet for Apple Silicon</a>';
         } else if (/android/i.test(userAgent)) {
-          downloadOptions.innerHTML = '<a class="cyan accent-4 waves-effect waves-light btn" href="https://play.google.com/store/apps/details?id=io.keet.app">Get Keet from Play Store</a>';
+          downloadBtn.innerHTML = '<a href="https://play.google.com/store/apps/details?id=io.keet.app">Get Keet from Play Store</a>';
         } else if (/iPad|iPhone|iPod/i.test(userAgent)) {
-          downloadOptions.innerHTML = '<a class="cyan accent-4 waves-effect waves-light btn" href="https://apps.apple.com/us/app/keet-by-holepunch/id6443880549">Get Keet from App Store</a>';
+          downloadBtn.innerHTML = '<a href="https://apps.apple.com/us/app/keet-by-holepunch/id6443880549">Get Keet from App Store</a>';
         } else {
-          downloadOptions.innerHTML = '<a class="cyan accent-4 waves-effect waves-light btn" href="https://keet.io/downloads/2.0.0/Keet-x64.tar.gz">Get Keet for x86 Linux</a>';
+          downloadBtn.innerHTML = '<a href="https://keet.io/downloads/2.0.0/Keet-x64.tar.gz">Get Keet for x86 Linux</a>';
         }
       }
 
