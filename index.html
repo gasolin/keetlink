@@ -39,11 +39,18 @@
       text-align: center;
       font-size: 12px;
     }
+    #qrcode {
+      margin-top: 20px;
+    }
+    #qrcode > img {
+      margin: 0 auto;
+    }
   </style>
 </head>
 <body>
   <div id="join-container">
-    <h4 class="center-align">Join Room: <span id="room-title"></span></h4>
+    <h4 class="center-align">Join Keet Room: <span id="room-title"></span></h4>
+    <div class="center-align" id="qrcode"></div>
     <div class="center-align" id="room-link"></div><br/>
     <div class="center-align">
         <a id="download-link" class="cyan accent-4 waves-effect waves-light btn modal-trigger" target="_blank" href="#modal1">Get Keet</a> 
@@ -65,6 +72,7 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       var urlParams = new URLSearchParams(window.location.search);
@@ -76,7 +84,13 @@
       document.getElementById('room-link').textContent = joinLink
     //   document.getElementById('download-link').href = 'https://example.com/download?room=' + key;
       document.getElementById('join-link').href = joinLink;
-      
+
+      var qrcode = new QRCode(document.getElementById("qrcode"), {
+        text: joinLink,
+        width: 200,
+        height: 200
+      });
+
       var downloadBtn = document.getElementById('download-link');
       downloadBtn.addEventListener('click', function() {
         checkOS();
