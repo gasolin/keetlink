@@ -28,14 +28,31 @@
       border-radius: 5px;
       word-wrap: break-word;
     }
+    @media (max-width: 576px) {
+        body {
+            display: block;
+            padding-left: 10px;
+        }
+    }
+    #legal-note {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 12px;
+    }
   </style>
 </head>
 <body>
   <div id="join-container">
-    <h4>Join Room: <span id="room-title"></span></h4>
-    <div id="room-link"></div><br/>
-    <a id="download-link" class="waves-effect waves-light btn modal-trigger" target="_blank" href="#modal1">Get Keet</a> 
-    <a id="join-link" class="waves-effect waves-light btn" target="_blank" href="#">Join room with Keet</a>
+    <h4 class="center-align">Join Room: <span id="room-title"></span></h4>
+    <div class="center-align" id="room-link"></div><br/>
+    <div class="center-align">
+        <a id="download-link" class="cyan accent-4 waves-effect waves-light btn modal-trigger" target="_blank" href="#modal1">Get Keet</a> 
+        <a id="join-link" class="cyan accent-4 waves-effect waves-light btn" target="_blank" href="#">Join room with Keet</a>
+    </div>
+
+    <div id="legal-note">
+        <p>This is not an official service from Keet, but its simple enough to check the <a href="https://github.com/gasolin/keetlink/blob/main/index.html" target="_blank">source here</a>.</p>
+    </div>
   </div>
 
   <!-- Modal Structure -->
@@ -43,7 +60,7 @@
     <div class="modal-content">
       <h4>Join Room with Keet</h4>
       <p>Please download the Keet app to join the room.</p>
-      <div id="download-options"></div>
+      <div class="cyan accent-4" id="download-options"></div>
     </div>
   </div>
 
@@ -57,6 +74,7 @@
 
       document.getElementById('room-title').textContent = title;
       document.getElementById('room-link').textContent = joinLink
+    //   document.getElementById('download-link').href = 'https://example.com/download?room=' + key;
       document.getElementById('join-link').href = joinLink;
       
       var downloadBtn = document.getElementById('download-link');
