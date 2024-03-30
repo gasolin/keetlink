@@ -1,0 +1,28 @@
+parse the given string start from `pear://keet/{key}` and compose to `https://gasolin.idv.tw/keetlink/#key={key}&title={title}`, the {title} is encoded for url .
+
+for example when see:
+
+```
+Join me on Keet.io - 🍐 The Pear Portal ⚡ (no expiry) 
+
+pear://keet/yry3g16rrjn5zhxcuo548sqd3bsere7bmx6g4dph7u5tpz5cj67csuk7gfxaynewytyc3aip4qc946jgwhou8mdf1xpujzz4y4qqbcdn1a
+```
+
+or 
+
+```
+Join me on Keet.io - 🍐 The Pear Portal ⚡ (invite expires on 2024/4/13 13:03 UTC) 
+
+pear://keet/yry3g16rrjn5zhxcuo548sqd3bsere7bmx6g4dph7u5tpz5cj67csuk7gfxaynewytyc3aip4qc946jgwhou8mdf1xpujzz4y4qqbcdn1a
+```
+
+the key will be 
+`yry3g16rrjn5zhxcuo548sqd3bsere7bmx6g4dph7u5tpz5cj67csuk7gfxaynewytyc3aip4qc946jgwhou8mdf1xpujzz4y4qqbcdn1a`
+
+and the title will be the encoded `🍐 The Pear Portal ⚡`, which is `The%20Pear%20Portal%E2%9C%B5`
+
+the return link will be `https://gasolin.idv.tw/keetlink/#key=yry3g16rrjn5zhxcuo548sqd3bsere7bmx6g4dph7u5tpz5cj67csuk7gfxaynewytyc3aip4qc946jgwhou8mdf1xpujzz4y4qqbcdn1a&title=The%20Pear%20Portal%E2%9C%B5`
+
+please read text below and directly return the result url, no need explaination:
+
+(Copy and paste the invite generate from Keet Room here)
