@@ -14,7 +14,7 @@ And here are some examples in [Awesome Pears - Keet rooms](https://github.com/ga
 
 2 steps:
 
-1. Copy and paste [prompt](PROMPT.md) to chatGPT
+1. Copy and paste [PROMPT.txt](https://raw.githubusercontent.com/gasolin/keetlink/main/PROMPT.txt) content to chatGPT
 2. Copy and paste the invite generate from Keet Room at the bottom.
 
 ----
