@@ -12,10 +12,11 @@ And here are some examples in [Awesome Pears - Keet rooms](https://github.com/ga
 
 ## How I turn my invite link to a web link?
 
-2 steps:
+1. Click the `How to Add my room?` link in [keetlink](https://gasolin.idv.tw/keetlink/)
+2. Copy and paste the invite generate from Keet Room > Room Profile > Invite.
 
-1. Copy and paste [PROMPT.txt](https://raw.githubusercontent.com/gasolin/keetlink/main/PROMPT.txt) content to chatGPT
-2. Copy and paste the invite generate from Keet Room at the bottom.
+> [!TIP]
+> Can copy and paste [PROMPT.txt](https://raw.githubusercontent.com/gasolin/keetlink/main/PROMPT.txt) content to chatGPT and convert
 
 ----
 
