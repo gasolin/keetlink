@@ -59,9 +59,9 @@ To pass in `key` we strip the prefix so Paste as `key=yryskxsgye5j6se8mzzxqoygzi
 
 The url composed with 3 parts:
 
-`https://gasolin.idv.tw/keetlink/?key=[room key]&title=[room title]`
+`https://gasolin.idv.tw/keetlink/#key=[room key]&title=[room title]`
 
-`https://gasolin.idv.tw/keetlink/?` is the basic url host in github page, no hidden track.
+`https://gasolin.idv.tw/keetlink/#` is the basic url host in github page, no hidden track.
 
 The key and title part are the same as above.
 

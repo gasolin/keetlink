@@ -45,6 +45,16 @@
     #qrcode > img {
       margin: 0 auto;
     }
+    .modal {
+      max-height: 90%;
+    }
+    #share-room-input {
+      min-height: 100px;
+    }
+    .warning-text {
+      color: hwb(56 17% 21% / 0.764);
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -57,12 +67,12 @@
     </div>
     <br/>
     <div class="center-align">
-      <text>Haven't installed Keet?</text>
-      <a id="download-link" href="#">Get Keet</a>
-    </div>
-
-    <div id="legal-note">
-        <p>This is not an official service from Keet.io, but its simple enough to verify the <a href="https://github.com/gasolin/keetlink/blob/main/index.html" target="_blank">source here</a>.</p>
+      <div id="legal-note">
+        <p><a href="#" id="share-room-link">➕ How to Add my room?</a></p>
+        <a id="download-link" href="#">Get Keet</a> <text>if haven't installed 🍐</text>
+        <p class="warning-text">⚠️ This is not an official service from Keet.io,
+          <a href="https://github.com/gasolin/keetlink/blob/main/index.html" target="_blank">source</a>.</p>
+      </div>
     </div>
   </div>
 
@@ -75,27 +85,69 @@
     </div>
   </div>
 
-  <script src="lib/materialize.min.js"></script>
+  <div id="share-room-modal" class="modal">
+    <div class="modal-content">
+      <h4>How to Add my room?</h4>
+      <div class="input-field">
+        <textarea id="share-room-input" class="materialize-textarea"></textarea>
+        <label for="share-room-input">Paste your room link here</label>
+      </div>
+
+      <div class="center-align">
+        <button id="convert-btn" class="cyan accent-4 waves-effect waves-light btn">Convert to Shareable Link</button>
+      </div>
+
+      <div id="converted-link" class="hide">
+        <h6>Your shareable link:</h6>
+        <div id="converted-link-text" class="input-field">
+          <input type="text" id="share-link-output" readonly>
+        </div>
+        <button id="copy-link-btn" class="waves-effect waves-light btn">Copy Link</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="lib/materialize.min.js"></script> -->
   <script src="lib/qrcode.min.js"></script>
   <script>
+    // If you host elsewhere, define your url here
+    var BASE_URL = 'https://gasolin.idv.tw';
+
     document.addEventListener('DOMContentLoaded', function() {
-      // Parse anchor to get key and title in order
-      var anchor = window.location.hash.substring(1);
-      if (anchor) {
-        var parts = anchor.split('&');
-        var anchorKey = parts[0].split('=')[1];
-        var anchorTitle = parts[1].split('=')[1];
-        anchorTitle = anchorTitle && decodeURIComponent(anchorTitle)
+      // Parse anchor to get key and title
+      function parseAnchor(hash) {
+        if (!hash) return {};
+
+        // Remove the leading #
+        hash = hash.substring(1);
+
+        let params = {};
+        // Split by & and process each key=value pair
+        hash.split('&').forEach(pair => {
+          const [key, value] = pair.split('=');
+          if (key && value) {
+            params[key] = value;
+          }
+        });
+
+        return params;
       }
 
-      var urlParams = new URLSearchParams(window.location.search);
-      var key = anchorKey || urlParams.get('key') || 'yry7g7wa7bmrjd1xxr7ce64581ij3hozq7589xfgxjrm74kgp34o36pwp46ohw4u1w63o6is6sax6j3swgdi66dmti8p8nfuyypfwewbuy';
-      var title = anchorTitle || urlParams.get('title') || 'Pear Community';
+      // Get parameters from anchor or URL query
+      const anchorParams = parseAnchor(window.location.hash);
+      const urlParams = new URLSearchParams(window.location.search);
+
+      // Use anchor key if available, fallback to URL param, then default
+      var key = anchorParams.key || urlParams.get('key') || 'yry7g7wa7bmrjd1xxr7ce64581ij3hozq7589xfgxjrm74kgp34o36pwp46ohw4u1w63o6is6sax6j3swgdi66dmti8p8nfuyypfwewbuy';
+      // Use anchor title if available, fallback to URL param, then default
+      // Decode URI component only if title exists
+      var title = anchorParams.title ? decodeURIComponent(anchorParams.title) :
+                urlParams.get('title') || key ? '' : 'Pear Community';
+
       var joinLink = 'pear://keet/' + key;
 
       document.getElementById('room-title').textContent = title;
       document.getElementById('room-link').textContent = joinLink
-    //   document.getElementById('download-link').href = 'https://example.com/download?room=' + key;
       document.getElementById('join-link').href = joinLink;
 
       var qrcode = new QRCode(document.getElementById("qrcode"), {
@@ -104,6 +156,47 @@
         height: 200
       });
 
+      // Initialize modals
+      var modals = document.querySelectorAll('.modal');
+      var modalInstances = M.Modal.init(modals);
+
+      // Share room modal functionality
+      var shareRoomLink = document.getElementById('share-room-link');
+      var shareRoomModal = document.getElementById('share-room-modal');
+      var convertBtn = document.getElementById('convert-btn');
+      var copyLinkBtn = document.getElementById('copy-link-btn');
+      var shareRoomInput = document.getElementById('share-room-input');
+      var convertedLinkDiv = document.getElementById('converted-link');
+      var shareLinkOutput = document.getElementById('share-link-output');
+
+      shareRoomLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        var shareRoomModalInstance = M.Modal.getInstance(shareRoomModal);
+        shareRoomModalInstance.open();
+      });
+
+      convertBtn.addEventListener('click', function() {
+        var input = shareRoomInput.value.trim();
+        var pearMatch = input.match(/pear:\/\/keet\/([^,\s]+)/);
+
+        if (pearMatch) {
+          var key = pearMatch[1];
+          var convertedUrl = `${BASE_URL}/keetlink/#key=${key}`;
+          shareLinkOutput.value = convertedUrl;
+          convertedLinkDiv.classList.remove('hide');
+          M.updateTextFields();
+        } else {
+          M.toast({html: 'Please enter a valid Keet room link starting with "pear://keet/"'});
+        }
+      });
+
+      copyLinkBtn.addEventListener('click', function() {
+        shareLinkOutput.select();
+        document.execCommand('copy');
+        M.toast({html: 'Link copied to clipboard!'});
+      });
+
+      // Download keet
       var downloadBtn = document.getElementById('download-link');
       checkOS();
 
@@ -124,9 +217,6 @@
           downloadBtn.innerHTML = '<a href="https://keet.io/downloads/2.2.0/Keet-x64.tar.gz">Get Keet for x86 Linux</a>';
         }
       }
-
-      var elems = document.querySelectorAll('.modal');
-      var instances = M.Modal.init(elems);
     });
   </script>
 </body>
