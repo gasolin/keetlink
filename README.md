@@ -22,7 +22,7 @@ And here are some examples in [Awesome Pears - Keet rooms](https://github.com/ga
 
 ## How keetlink works?
 
-Its an single page static html that accept url params. If no url param received it will show the [pear community](https://gasolin.idv.tw/keetlink) room link.
+Its an single page static html that accept anchor parameters. If no anchor parameter received it will show the [pear community](https://gasolin.idv.tw/keetlink) room link.
 
 ### with Anchor
 
@@ -34,16 +34,17 @@ The url composed with 2 parts:
 
 `https://gasolin.idv.tw/keetlink/#` is the basic url host in github page, no hidden track.
 
-#### Alternative format:
+#### Simple format:
 
-`https://gasolin.idv.tw/keetlink/#theinvite=[room key]`
+`https://gasolin.idv.tw/keetlink/#{room key}`
 
-This format provides a simpler way to share room invites using the `theinvite` parameter.
+This format provides a cleaner way to share room invites using just the room key.
 
+#### Simple format with title:
 
-### with URL params
+`https://gasolin.idv.tw/keetlink/#{room key}&title={room title}`
 
-A more schematic correct way is pass invite key and title through URL params, but the path and param might be recorded on server side.
+This format combines the simple key format with an optional title parameter.
 
 
 #### title
@@ -52,15 +53,15 @@ A more schematic correct way is pass invite key and title through URL params, bu
 
 Can encode plain text title via `encodeURIComponent`. Or you can ask chatGPT `how  `Bug Bandits🐞` looks like  in url?`
 
-and it will return `Bug%20Bandits%F0%9F%90%9E`. Paste that as `title=Bug%20Bandits%F0%9F%90%9E`
+and it will return `Bug%20Bandits%F0%9F%90%9E`. Use this as the title parameter.
 
 #### key
 
-`title` is used to compose keet invite link in the page
+`key` is used to compose keet invite link in the page
 
 Normal keet invite starts from `pear://keet/` prefix, ex: `pear://keet/yryskxsgye5j6se8mzzxqoygzion3zyo93iphxhew4pznn7sdbeat17cr5gaquoawe9iq7eipkez99qm6zpkouckg8sacci8bdkgmcdtoc`
 
-To pass in `key` we strip the prefix so Paste as `key=yryskxsgye5j6se8mzzxqoygzion3zyo93iphxhew4pznn7sdbeat17cr5gaquoawe9iq7eipkez99qm6zpkouckg8sacci8bdkgmcdtoc`
+To pass in `key` we strip the prefix and use the room key directly.
 
 #### Basic url:
 
@@ -77,10 +78,12 @@ The key and title part are the same as above.
 The params should composite with `&`, so the final form for `Bug Bandits🐞` room is 
 > https://gasolin.idv.tw/keetlink/#key=yryskxsgye5j6se8mzzxqoygzion3zyo93iphxhew4pznn7sdbeat17cr5gaquoawe9iq7eipkez99qm6zpkouckg8sacci8bdkgmcdtoc&title=Bug%20Bandits%F0%9F%90%9E
 
-or with the alternative `theinvite` format:
+or with the simple format:
 
-> https://gasolin.idv.tw/keetlink/#theinvite=yryskxsgye5j6se8mzzxqoygzion3zyo93iphxhew4pznn7sdbeat17cr5gaquoawe9iq7eipkez99qm6zpkouckg8sacci8bdkgmcdtoc
+> https://gasolin.idv.tw/keetlink/#yryskxsgye5j6se8mzzxqoygzion3zyo93iphxhew4pznn7sdbeat17cr5gaquoawe9iq7eipkez99qm6zpkouckg8sacci8bdkgmcdtoc
 
-or with url params
+or with the simple format and title:
 
-> https://gasolin.idv.tw/keetlink/?key=yryskxsgye5j6se8mzzxqoygzion3zyo93iphxhew4pznn7sdbeat17cr5gaquoawe9iq7eipkez99qm6zpkouckg8sacci8bdkgmcdtoc&title=Bug%20Bandits%F0%9F%90%9E
+> https://gasolin.idv.tw/keetlink/#yryskxsgye5j6se8mzzxqoygzion3zyo93iphxhew4pznn7sdbeat17cr5gaquoawe9iq7eipkez99qm6zpkouckg8sacci8bdkgmcdtoc&title=Bug%20Bandits%F0%9F%90%9E
+
+

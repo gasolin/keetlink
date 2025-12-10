@@ -127,12 +127,25 @@
 
         let params = {};
         
-        // Check for #theinvite= format first
-        if (hash.startsWith('theinvite=')) {
-          const inviteValue = hash.substring(10); // Remove 'theinvite='
-          params.key = inviteValue;
-        } else {
+        if (hash.includes('&')) {
           // Split by & and process each key=value pair
+          hash.split('&').forEach(pair => {
+            const [key, value] = pair.split('=');
+            if (key && value) {
+              params[key] = value;
+            }
+          });
+        } else if (!hash.includes('=')) {
+          // Simple format: #{key} or #{key}&title={title}
+          const parts = hash.split('&');
+          params.key = parts[0];
+          
+          // Check for title in second part
+          if (parts.length > 1 && parts[1].startsWith('title=')) {
+            params.title = parts[1].substring(6); // Remove 'title='
+          }
+        } else {
+          // Split by & and process each key=value pair (fallback)
           hash.split('&').forEach(pair => {
             const [key, value] = pair.split('=');
             if (key && value) {
@@ -144,16 +157,15 @@
         return params;
       }
 
-      // Get parameters from anchor or URL query
+      // Get parameters from anchor
       const anchorParams = parseAnchor(window.location.hash);
-      const urlParams = new URLSearchParams(window.location.search);
 
-      // Use anchor key if available, fallback to URL param, then default
-      var key = anchorParams.key || urlParams.get('key') || 'yry7g7wa7bmrjd1xxr7ce64581ij3hozq7589xfgxjrm74kgp34o36pwp46ohw4u1w63o6is6sax6j3swgdi66dmti8p8nfuyypfwewbuy';
-      // Use anchor title if available, fallback to URL param, then default
+      // Use anchor key if available, then default
+      var key = anchorParams.key || 'yry7g7wa7bmrjd1xxr7ce64581ij3hozq7589xfgxjrm74kgp34o36pwp46ohw4u1w63o6is6sax6j3swgdi66dmti8p8nfuyypfwewbuy';
+      // Use anchor title if available, then default
       // Decode URI component only if title exists
       var title = anchorParams.title ? decodeURIComponent(anchorParams.title) :
-                urlParams.get('title') || key ? '' : 'Pear Community';
+                (key ? '' : 'Pear Community');
 
       var joinLink = 'pear://keet/' + key;
 
