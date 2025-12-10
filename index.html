@@ -126,13 +126,20 @@
         hash = hash.substring(1);
 
         let params = {};
-        // Split by & and process each key=value pair
-        hash.split('&').forEach(pair => {
-          const [key, value] = pair.split('=');
-          if (key && value) {
-            params[key] = value;
-          }
-        });
+        
+        // Check for #theinvite= format first
+        if (hash.startsWith('theinvite=')) {
+          const inviteValue = hash.substring(10); // Remove 'theinvite='
+          params.key = inviteValue;
+        } else {
+          // Split by & and process each key=value pair
+          hash.split('&').forEach(pair => {
+            const [key, value] = pair.split('=');
+            if (key && value) {
+              params[key] = value;
+            }
+          });
+        }
 
         return params;
       }

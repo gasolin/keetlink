@@ -34,6 +34,12 @@ The url composed with 2 parts:
 
 `https://gasolin.idv.tw/keetlink/#` is the basic url host in github page, no hidden track.
 
+#### Alternative format:
+
+`https://gasolin.idv.tw/keetlink/#theinvite=[room key]`
+
+This format provides a simpler way to share room invites using the `theinvite` parameter.
+
 
 ### with URL params
 
@@ -70,6 +76,10 @@ The key and title part are the same as above.
 
 The params should composite with `&`, so the final form for `Bug Bandits🐞` room is 
 > https://gasolin.idv.tw/keetlink/#key=yryskxsgye5j6se8mzzxqoygzion3zyo93iphxhew4pznn7sdbeat17cr5gaquoawe9iq7eipkez99qm6zpkouckg8sacci8bdkgmcdtoc&title=Bug%20Bandits%F0%9F%90%9E
+
+or with the alternative `theinvite` format:
+
+> https://gasolin.idv.tw/keetlink/#theinvite=yryskxsgye5j6se8mzzxqoygzion3zyo93iphxhew4pznn7sdbeat17cr5gaquoawe9iq7eipkez99qm6zpkouckg8sacci8bdkgmcdtoc
 
 or with url params
 
