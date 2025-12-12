@@ -112,7 +112,7 @@
   </div>
 
   <script src="lib/materialize.min.js"></script>
-  <script src="lib/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@2.0.4/dist/qrcode.js"></script>
   <script>
     // If you host elsewhere, define your url here
     var BASE_URL = 'https://gasolin.idv.tw';
@@ -173,11 +173,28 @@
       document.getElementById('room-link').textContent = joinLink
       document.getElementById('join-link').href = joinLink;
 
-      var qrcode = new QRCode(document.getElementById("qrcode"), {
-        text: joinLink,
-        width: 200,
-        height: 200
-      });
+      // Generate QR code using qrcode-generator
+      var qr = qrcode(0, 'M');
+      qr.addData(joinLink);
+      qr.make();
+      
+      // Create canvas and append to qrcode div
+      var canvas = document.createElement('canvas');
+      var size = 200;
+      var cellSize = Math.floor(size / qr.getModuleCount());
+      canvas.width = size;
+      canvas.height = size;
+      var ctx = canvas.getContext('2d');
+      
+      // Draw QR code
+      for (var row = 0; row < qr.getModuleCount(); row++) {
+        for (var col = 0; col < qr.getModuleCount(); col++) {
+          ctx.fillStyle = qr.isDark(row, col) ? '#000000' : '#FFFFFF';
+          ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
+        }
+      }
+      
+      document.getElementById("qrcode").appendChild(canvas);
 
       // Initialize modals
       var modals = document.querySelectorAll('.modal');
