@@ -127,31 +127,56 @@
 
         let params = {};
         
-        if (hash.includes('&')) {
-          // Split by & and process each key=value pair
-          hash.split('&').forEach(pair => {
-            const [key, value] = pair.split('=');
-            if (key && value) {
-              params[key] = value;
-            }
-          });
-        } else if (!hash.includes('=')) {
-          // Simple format: #{key} or #{key}&title={title}
-          const parts = hash.split('&');
-          params.key = parts[0];
+        // Handle prefix format: #dev/{key} or #int/{key}
+        const parts = hash.split('/');
+        if (parts.length > 1) {
+          // Has prefix like dev/ or int/, use the second part as key
+          const afterProtocol = parts[1];
+          const remainingHash = parts.slice(1).join('/'); // Join back everything after the prefix
           
-          // Check for title in second part
-          if (parts.length > 1 && parts[1].startsWith('title=')) {
-            params.title = parts[1].substring(6); // Remove 'title='
+          if (remainingHash.includes('&')) {
+            // Split by & and process each key=value pair
+            remainingHash.split('&').forEach(pair => {
+              const [key, value] = pair.split('=');
+              if (key && value) {
+                params[key] = value;
+              } else if (key) {
+                // First part without = is the key
+                params.key = key;
+              }
+            });
+          } else {
+            // Simple format: #dev/{key}
+            params.key = remainingHash;
           }
         } else {
-          // Split by & and process each key=value pair (fallback)
-          hash.split('&').forEach(pair => {
-            const [key, value] = pair.split('=');
-            if (key && value) {
-              params[key] = value;
+          // No prefix, use original logic
+          if (hash.includes('&')) {
+            // Split by & and process each key=value pair
+            hash.split('&').forEach(pair => {
+              const [key, value] = pair.split('=');
+              if (key && value) {
+                params[key] = value;
+              }
+            });
+          } else if (!hash.includes('=')) {
+            // Simple format: #{key} or #{key}&title={title}
+            const hashParts = hash.split('&');
+            params.key = hashParts[0];
+            
+            // Check for title in second part
+            if (hashParts.length > 1 && hashParts[1].startsWith('title=')) {
+              params.title = hashParts[1].substring(6); // Remove 'title='
             }
-          });
+          } else {
+            // Split by & and process each key=value pair (fallback)
+            hash.split('&').forEach(pair => {
+              const [key, value] = pair.split('=');
+              if (key && value) {
+                params[key] = value;
+              }
+            });
+          }
         }
 
         return params;
