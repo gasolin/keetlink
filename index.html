@@ -652,54 +652,6 @@
             const matchDesc = room.description.toLowerCase().includes(lowerFilter);
             const matchTag = room.tags.some(tag => tag.toLowerCase().includes(lowerFilter));
 
-<<<<<<< Updated upstream
-  <script src="lib/materialize.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@2.0.4/dist/qrcode.js"></script>
-  <script>
-    // If you host elsewhere, define your url here
-    var BASE_URL = 'https://gasolin.idv.tw';
-
-    document.addEventListener('DOMContentLoaded', function() {
-      // Parse anchor to get key and title
-      // Supports 3 formats as documented in README:
-      // 1. Basic: #key=[room_key]&title=[room_title]
-      // 2. Simple: #{room_key}
-      // 3. Simple with title: #{room_key}&title={room_title}
-      function parseAnchor(hash) {
-        if (!hash) return {};
-
-        // Remove the leading #
-        hash = hash.substring(1);
-        
-        const params = {};
-        
-        // Check if hash contains '=' (indicates key=value format)
-        if (hash.includes('=')) {
-          // Format 1 or 3: Contains key=value pairs
-          hash.split('&').forEach(pair => {
-            const [key, value] = pair.split('=');
-            if (key && value) {
-              params[key] = decodeURIComponent(value);
-            }
-          });
-        } else {
-          // Format 2: Simple format - could be just key or key&title=value
-          const parts = hash.split('&');
-          
-          // First part is always the key
-          if (parts[0]) {
-            params.key = parts[0];
-          }
-          
-          // Check for title parameter in remaining parts
-          for (let i = 1; i < parts.length; i++) {
-            if (parts[i].startsWith('title=')) {
-              params.title = decodeURIComponent(parts[i].substring(6));
-              break;
-            }
-          }
-        }
-=======
             if (matchName || matchDesc || matchTag) {
                 hasVisible = true;
                 const card = document.createElement('div');
@@ -722,22 +674,10 @@
                 container.appendChild(card);
             }
         });
->>>>>>> Stashed changes
 
         noResults.style.display = hasVisible ? 'none' : 'block';
     }
 
-<<<<<<< Updated upstream
-      // Get parameters from anchor
-      const anchorParams = parseAnchor(window.location.hash);
-
-      // Use anchor key if available, then default
-      var key = anchorParams.key || 'yry7g7wa7bmrjd1xxr7ce64581ij3hozq7589xfgxjrm74kgp34o36pwp46ohw4u1w63o6is6sax6j3swgdi66dmti8p8nfuyypfwewbuy';
-      // Use anchor title if available, then default
-      // Decode URI component only if title exists
-      var title = anchorParams.title ? decodeURIComponent(anchorParams.title) :
-                (key ? '' : 'Pear Community');
-=======
     function selectRoom(room) {
         currentSelectedRoom = room;
         
@@ -804,7 +744,6 @@
         updateSearchClearButton();
         renderRooms(tag);
     }
->>>>>>> Stashed changes
 
     function clearSearch() {
         searchInput.value = '';
@@ -812,68 +751,9 @@
         renderRooms('');
     }
 
-<<<<<<< Updated upstream
-      document.getElementById('room-title').textContent = title;
-      document.getElementById('room-link').textContent = joinLink
-      document.getElementById('join-link').href = joinLink;
-
-      // Generate QR code using qrcode-generator
-      var qr = qrcode(0, 'M');
-      qr.addData(joinLink);
-      qr.make();
-      
-      // Create canvas and append to qrcode div
-      var canvas = document.createElement('canvas');
-      var size = 200;
-      var cellSize = Math.floor(size / qr.getModuleCount());
-      canvas.width = size;
-      canvas.height = size;
-      var ctx = canvas.getContext('2d');
-      
-      // Draw QR code
-      for (var row = 0; row < qr.getModuleCount(); row++) {
-        for (var col = 0; col < qr.getModuleCount(); col++) {
-          ctx.fillStyle = qr.isDark(row, col) ? '#000000' : '#FFFFFF';
-          ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
-        }
-      }
-      
-      document.getElementById("qrcode").appendChild(canvas);
-
-      // Initialize modals
-      var modals = document.querySelectorAll('.modal');
-      var modalInstances = M.Modal.init(modals);
-
-      // Share room modal functionality
-      var shareRoomLink = document.getElementById('share-room-link');
-      var shareRoomModal = document.getElementById('share-room-modal');
-      var convertBtn = document.getElementById('convert-btn');
-      var copyLinkBtn = document.getElementById('copy-link-btn');
-      var shareRoomInput = document.getElementById('share-room-input');
-      var convertedLinkDiv = document.getElementById('converted-link');
-      var shareLinkOutput = document.getElementById('share-link-output');
-
-      shareRoomLink.addEventListener('click', function(e) {
-        e.preventDefault();
-        var shareRoomModalInstance = M.Modal.getInstance(shareRoomModal);
-        shareRoomModalInstance.open();
-      });
-
-      convertBtn.addEventListener('click', function() {
-        var input = shareRoomInput.value.trim();
-        var pearMatch = input.match(/pear:\/\/keet\/([^,\s]+)/);
-
-        if (pearMatch) {
-          var key = pearMatch[1];
-          var convertedUrl = `${BASE_URL}/keetlink/#key=${key}`;
-          shareLinkOutput.value = convertedUrl;
-          convertedLinkDiv.classList.remove('hide');
-          M.updateTextFields();
-=======
     function updateSearchClearButton() {
         if (searchInput.value.trim()) {
             searchClearBtn.classList.add('visible');
->>>>>>> Stashed changes
         } else {
             searchClearBtn.classList.remove('visible');
         }

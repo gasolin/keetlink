@@ -1,74 +1,85 @@
-# KeetLink
+# Keetlink - an unofficial Keet Groups Directory
 
-A simple web tool to share Keet room invites via HTTP links. Transform your `pear://keet/` URLs into shareable web links that anyone can access.
+A modern, searchable directory for Keet groups and communities. Discover and join encrypted peer-to-peer chat rooms with a beautiful, responsive interface.
 
 ## 🚀 Quick Start
 
-Visit [https://gasolin.idv.tw/keetlink/](https://gasolin.idv.tw/keetlink/)
+Visit [https://gasolin.idv.tw/keetlink/](https://gasolin.idv.tw/keetlink/) to browse and join Keet groups.
 
-See examples in [Awesome Pears - Keet rooms](https://github.com/gasolin/awesome-pears/blob/main/keet_rooms.md)
+## ✨ Features
 
-## 📝 How to Create a Web Link
+- **🔍 Smart Search**: Find groups by name, tags, or description
+- **📱 Responsive Design**: Works perfectly on desktop and mobile devices
+- **🎨 Modern UI**: Dark theme with gradient accents and smooth animations
+- **🏷️ Tag System**: Click tags to quickly filter related groups
+- **📱 QR Code Support**: Scan QR codes to join groups instantly
+- **🔗 Direct Links**: Generate shareable links for any group
 
-1. Visit [KeetLink](https://gasolin.idv.tw/keetlink/) and click "How to Add my room?"
-2. Copy your Keet invite from: **Room Profile > Invite**
-3. Paste it into the form to generate your web link
+## 📱 How to Join a Group
 
-> [!TIP]
-> Use [PROMPT.txt](https://raw.githubusercontent.com/gasolin/keetlink/main/PROMPT.txt) with ChatGPT for automated conversion
+1. Browse the directory or use the search bar to find interesting groups
+2. Click on any group card to view details
+3. Scan the QR code with your Keet app, or click "Join Group with Keet"
+4. If you don't have Keet installed, follow the download link for your platform
+
+## 🏷️ Popular Categories
+
+- **Official**: Pear and Keet official rooms
+- **Development**: Developer discussions, bug reports, app development
+- **Community**: Social chats, regional communities
+- **Crypto**: Bitcoin and cryptocurrency discussions
+- **Content**: Music sharing, interesting links, memes
 
 ## 🔧 How It Works
 
-KeetLink is a static HTML page that accepts URL parameters. Without parameters, it displays the default [Pear Community](https://gasolin.idv.tw/keetlink) room.
+The directory is a static HTML page with embedded group data. Each group includes:
 
-### URL Formats
+- **Name**: Display name of the group
+- **Description**: Brief overview of the group's purpose
+- **Tags**: Categories for easy filtering
+- **Key**: Unique identifier for joining the group
 
-#### 1. Basic Format
-```
-https://gasolin.idv.tw/keetlink/#key=[room_key]&title=[room_title]
-```
+### URL Format
 
-#### 2. Simple Format (Key Only)
+Direct group links use this format:
 ```
 https://gasolin.idv.tw/keetlink/#{room_key}
 ```
 
-#### 3. Simple Format with Title
+Example:
 ```
-https://gasolin.idv.tw/keetlink/#{room_key}&title={room_title}
-```
-
-### Parameters
-
-#### `key` (Required)
-The room identifier extracted from your Keet invite URL.
-
-**Example:** From `pear://keet/yryskxsgye5j6se8mzzxqoygzion3zyo93iphxhew4pznn7sdbeat17cr5gaquoawe9iq7eipkez99qm6zpkouckg8sacci8bdkgmcdtoc`
-
-Use: `yryskxsgye5j6se8mzzxqoygzion3zyo93iphxhew4pznn7sdbeat17cr5gaquoawe9iq7eipkez99qm6zpkouckg8sacci8bdkgmcdtoc`
-
-#### `title` (Optional)
-The display name for your room. Use `encodeURIComponent()` for special characters.
-
-**Example:** `Bug Bandits🐞` becomes `Bug%20Bandits%F0%9F%90%9E`
-
-### Complete Examples
-
-**Basic format:**
-```
-https://gasolin.idv.tw/keetlink/#key=yryskxsgye5j6se8mzzxqoygzion3zyo93iphxhew4pznn7sdbeat17cr5gaquoawe9iq7eipkez99qm6zpkouckg8sacci8bdkgmcdtoc&title=Bug%20Bandits%F0%9F%90%9E
-```
-
-**Simple format:**
-```
-https://gasolin.idv.tw/keetlink/#yryskxsgye5j6se8mzzxqoygzion3zyo93iphxhew4pznn7sdbeat17cr5gaquoawe9iq7eipkez99qm6zpkouckg8sacci8bdkgmcdtoc
-```
-
-**Simple format with title:**
-```
-https://gasolin.idv.tw/keetlink/#yryskxsgye5j6se8mzzxqoygzion3zyo93iphxhew4pznn7sdbeat17cr5gaquoawe9iq7eipkez99qm6zpkouckg8sacci8bdkgmcdtoc&title=Bug%20Bandits%F0%9F%90%9E
+https://gasolin.idv.tw/keetlink/#yfo4afrc46rkykdue9br5zsiyc917eqqpr9oiy8z19xrfj9ffenx69t7eqaz5uuann7bf3pdih51o3neibf199i8cyb8tyexngxt8ug361rw9k4pgfsfxp7xxpkxoufigkz5e8ddizope3mkx5ix4dp7yapkhye
 ```
 
 ## 🏠 Self-Hosting
 
-Want to host KeetLink on your own domain? Simply fork this repository and deploy to your preferred hosting platform.
+Want to host your own Keet groups directory?
+
+1. Fork this repository
+2. Modify the `rooms` array in `index.html` to include your groups
+3. Deploy to any static hosting platform (GitHub Pages, Netlify, Vercel, etc.)
+
+### Adding New Groups
+
+Update the `rooms` array in `index.html`:
+
+```javascript
+{
+    "name": "Your Group Name",
+    "description": "Brief description of your group",
+    "key": "your-room-key-here",
+    "tags": ["Tag1", "Tag2", "Tag3"]
+}
+```
+
+## 🛠️ Technical Details
+
+- **Pure HTML/CSS/JavaScript**: No build process required
+- **QRCode.js**: For generating QR codes
+- **Responsive Grid Layout**: Adapts to all screen sizes
+- **Client-side Search**: Instant filtering without server requests
+- **URL Hash Navigation**: Direct links and browser back button support, and no trace by analytics tools
+
+## 📄 License
+
+MIT, This project helps make Keet more accessible to everyone. Feel free to contribute and improve the directory!
