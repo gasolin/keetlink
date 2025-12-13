@@ -119,63 +119,42 @@
 
     document.addEventListener('DOMContentLoaded', function() {
       // Parse anchor to get key and title
+      // Supports 3 formats as documented in README:
+      // 1. Basic: #key=[room_key]&title=[room_title]
+      // 2. Simple: #{room_key}
+      // 3. Simple with title: #{room_key}&title={room_title}
       function parseAnchor(hash) {
         if (!hash) return {};
 
         // Remove the leading #
         hash = hash.substring(1);
-
-        let params = {};
         
-        // Handle prefix format: #dev/{key} or #int/{key}
-        const parts = hash.split('/');
-        if (parts.length > 1) {
-          // Has prefix like dev/ or int/, use the second part as key
-          const afterProtocol = parts[1];
-          const remainingHash = parts.slice(1).join('/'); // Join back everything after the prefix
-          
-          if (remainingHash.includes('&')) {
-            // Split by & and process each key=value pair
-            remainingHash.split('&').forEach(pair => {
-              const [key, value] = pair.split('=');
-              if (key && value) {
-                params[key] = value;
-              } else if (key) {
-                // First part without = is the key
-                params.key = key;
-              }
-            });
-          } else {
-            // Simple format: #dev/{key}
-            params.key = remainingHash;
-          }
-        } else {
-          // No prefix, use original logic
-          if (hash.includes('&')) {
-            // Split by & and process each key=value pair
-            hash.split('&').forEach(pair => {
-              const [key, value] = pair.split('=');
-              if (key && value) {
-                params[key] = value;
-              }
-            });
-          } else if (!hash.includes('=')) {
-            // Simple format: #{key} or #{key}&title={title}
-            const hashParts = hash.split('&');
-            params.key = hashParts[0];
-            
-            // Check for title in second part
-            if (hashParts.length > 1 && hashParts[1].startsWith('title=')) {
-              params.title = hashParts[1].substring(6); // Remove 'title='
+        const params = {};
+        
+        // Check if hash contains '=' (indicates key=value format)
+        if (hash.includes('=')) {
+          // Format 1 or 3: Contains key=value pairs
+          hash.split('&').forEach(pair => {
+            const [key, value] = pair.split('=');
+            if (key && value) {
+              params[key] = decodeURIComponent(value);
             }
-          } else {
-            // Split by & and process each key=value pair (fallback)
-            hash.split('&').forEach(pair => {
-              const [key, value] = pair.split('=');
-              if (key && value) {
-                params[key] = value;
-              }
-            });
+          });
+        } else {
+          // Format 2: Simple format - could be just key or key&title=value
+          const parts = hash.split('&');
+          
+          // First part is always the key
+          if (parts[0]) {
+            params.key = parts[0];
+          }
+          
+          // Check for title parameter in remaining parts
+          for (let i = 1; i < parts.length; i++) {
+            if (parts[i].startsWith('title=')) {
+              params.title = decodeURIComponent(parts[i].substring(6));
+              break;
+            }
           }
         }
 
