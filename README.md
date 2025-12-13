@@ -14,6 +14,8 @@ Visit [https://gasolin.idv.tw/keetlink/](https://gasolin.idv.tw/keetlink/) to br
 - **🏷️ Tag System**: Click tags to quickly filter related groups
 - **📱 QR Code Support**: Scan QR codes to join groups instantly
 - **🔗 Direct Links**: Generate shareable links for any group
+- **🌐 Dynamic URL Support**: Support for custom room keys and titles
+- **📊 JSON Data Management**: Room data stored in separate JSON file for easy maintenance
 
 ## 📱 How to Join a Group
 
@@ -41,29 +43,42 @@ The directory is a static HTML page with embedded group data. Each group include
 
 ### URL Format
 
-Direct group links use this format:
+Direct group links support multiple formats:
+
+**Basic format (for catalog groups):**
 ```
 https://gasolin.idv.tw/keetlink/#{room_key}
 ```
 
-Example:
+**Custom format with title (for non-catalog groups):**
 ```
+https://gasolin.idv.tw/keetlink/#{room_key}&title={room_title}
+```
+
+**Examples:**
+```
+# Catalog group
 https://gasolin.idv.tw/keetlink/#yfo4afrc46rkykdue9br5zsiyc917eqqpr9oiy8z19xrfj9ffenx69t7eqaz5uuann7bf3pdih51o3neibf199i8cyb8tyexngxt8ug361rw9k4pgfsfxp7xxpkxoufigkz5e8ddizope3mkx5ix4dp7yapkhye
+
+# Custom group with title
+https://gasolin.idv.tw/keetlink/#customroomkey&title=My%20Custom%20Group
 ```
+
+**Note**: Groups not in the official catalog will display "This Group does not in catalog" in the tags section.
 
 ## 🏠 Self-Hosting
 
 Want to host your own Keet groups directory?
 
 1. Fork this repository
-2. Modify the `rooms` array in `index.html` to include your groups
+2. Modify the `room.json` file to include your groups
 3. Deploy to any static hosting platform (GitHub Pages, Netlify, Vercel, etc.)
 
 ### Adding New Groups
 
-Update the `rooms` array in `index.html`:
+Update the `room.json` file:
 
-```javascript
+```json
 {
     "name": "Your Group Name",
     "description": "Brief description of your group",
@@ -72,6 +87,12 @@ Update the `rooms` array in `index.html`:
 }
 ```
 
+**Data Structure:**
+- **name**: Display name of the group
+- **description**: Brief overview of the group's purpose  
+- **key**: Unique identifier for joining the group
+- **tags**: Array of categories for easy filtering
+
 ## 🛠️ Technical Details
 
 - **Pure HTML/CSS/JavaScript**: No build process required
@@ -79,6 +100,9 @@ Update the `rooms` array in `index.html`:
 - **Responsive Grid Layout**: Adapts to all screen sizes
 - **Client-side Search**: Instant filtering without server requests
 - **URL Hash Navigation**: Direct links and browser back button support, and no trace by analytics tools
+- **JSON Data Loading**: Asynchronous loading of room data from external file
+- **Dynamic Room Handling**: Support for both catalog and non-catalog rooms
+- **Error Handling**: Graceful fallback if JSON loading fails
 
 ## Reference
 
@@ -86,4 +110,15 @@ Previous version in [v1 branch](https://github.com/gasolin/keetlink/tree/v1)
 
 ## 📄 License
 
-MIT, This project helps make Keet more accessible to everyone. Feel free to contribute and improve the directory!
+MIT
+
+### Contributing
+
+This project helps make Keet more accessible to everyone. Feel free to contribute and improve the directory! By
+
+- 🐛 Report bugs or request features via GitHub issues
+- 💡 Suggest new groups to add to the catalog
+- 🔧 Improve the UI/UX or add new features
+- 📝 Help improve documentation
+
+The directory is designed to be community-driven and welcomes contributions from all Keet users!
