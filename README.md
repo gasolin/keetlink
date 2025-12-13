@@ -80,6 +80,10 @@ Update the `rooms` array in `index.html`:
 - **Client-side Search**: Instant filtering without server requests
 - **URL Hash Navigation**: Direct links and browser back button support, and no trace by analytics tools
 
+## Reference
+
+Previous version in [v1 branch](https://github.com/gasolin/keetlink/tree/v1)
+
 ## 📄 License
 
 MIT, This project helps make Keet more accessible to everyone. Feel free to contribute and improve the directory!
