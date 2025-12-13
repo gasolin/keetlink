@@ -681,8 +681,12 @@
     function selectRoom(room) {
         currentSelectedRoom = room;
         
-        // Update URL with anchor
-        window.location.hash = `#${room.key}`;
+        // Update URL with anchor (preserve title parameter if exists)
+        let urlHash = `#${room.key}`;
+        if (room.isTemporary && room.name !== 'Unknown Group') {
+            urlHash += `&title=${encodeURIComponent(room.name)}`;
+        }
+        window.location.hash = urlHash;
         
         // Hide list view and show detail view
         container.style.display = 'none';
@@ -694,7 +698,12 @@
         
         // Populate tags
         const tagsContainer = document.getElementById('detailRoomTags');
-        tagsContainer.innerHTML = room.tags.map(tag => `<span class="tag" onclick="event.stopPropagation(); searchByTag('${tag}')">${tag}</span>`).join('');
+        if (room.isTemporary) {
+            // For temporary rooms, show non-clickable tag with orange background
+            tagsContainer.innerHTML = `<span class="tag" style="cursor: default; color: #ff9800">This Group does not in catalog</span>`;
+        } else {
+            tagsContainer.innerHTML = room.tags.map(tag => `<span class="tag" onclick="event.stopPropagation(); searchByTag('${tag}')">${tag}</span>`).join('');
+        }
         
         // Generate join link
         const joinLink = `pear://keet/${room.key}`;
@@ -762,8 +771,8 @@
     function backToList() {
         currentSelectedRoom = null;
         
-        // Clear URL hash
-        window.location.hash = '';
+        // Clear URL hash and query parameters
+        window.history.pushState("", document.title, window.location.pathname + window.location.search);
         
         // Show list view and hide detail view
         container.style.display = 'grid';
@@ -785,14 +794,44 @@
         renderRooms(searchInput.value);
     }
 
+    // Parse URL parameters
+    function parseUrlParameters() {
+        const hash = window.location.hash.substring(1);
+        if (!hash) return null;
+
+        // Split hash and query parameters
+        const [roomKey, ...queryParts] = hash.split('&');
+        const params = { key: roomKey };
+        
+        // Parse query parameters
+        queryParts.forEach(part => {
+            const [key, value] = part.split('=');
+            if (key && value) {
+                params[key] = decodeURIComponent(value);
+            }
+        });
+
+        return params;
+    }
+
     // Handle URL hash on page load
     function handleHashChange() {
-        const hash = window.location.hash.substring(1);
-        if (hash) {
-            const room = rooms.find(r => r.key === hash);
+        const params = parseUrlParameters();
+        if (params && params.key) {
+            const room = rooms.find(r => r.key === params.key);
             if (room) {
                 // Wait for initial render before selecting
                 setTimeout(() => selectRoom(room), 100);
+            } else {
+                // Room not found in catalog, create a temporary room object
+                const tempRoom = {
+                    name: params.title || 'Unknown Group',
+                    description: 'This group is not in the catalog.',
+                    key: params.key,
+                    tags: ['Unknown'],
+                    isTemporary: true
+                };
+                setTimeout(() => selectRoom(tempRoom), 100);
             }
         }
     }
