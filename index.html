@@ -1,116 +1,658 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Join Room</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #f5f5f5;
-    }
-    #join-container {
-      max-width: 500px;
-      padding: 20px;
-      border-radius: 10px;
-      background-color: white;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    #room-link {
-      margin-top: 10px;
-      padding: 10px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      word-wrap: break-word;
-    }
-    @media (max-width: 576px) {
-        body {
-            display: block;
-            padding-left: 10px;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keet Groups Directory</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        :root {
+            --bg-dark: #0f111a;
+            --bg-card: #1c2033;
+            --text-main: #ffffff;
+            --text-muted: #8b9bb4;
+            --accent-cyan: #46e3d6;
+            --accent-blue: #33c5f4;
+            --gradient-main: linear-gradient(135deg, #0b0d17 0%, #1a1d3a 100%);
+            --gradient-btn: linear-gradient(90deg, #46e3d6 0%, #33c5f4 100%);
         }
-    }
-    #legal-note {
-      margin-top: 20px;
-      text-align: center;
-      font-size: 12px;
-    }
-    #qrcode {
-      margin-top: 20px;
-    }
-    #qrcode > img {
-      margin: 0 auto;
-    }
-    .modal {
-      max-height: 90%;
-    }
-    #share-room-input {
-      min-height: 100px;
-    }
-    .warning-text {
-      color: hwb(56 17% 21% / 0.764);
-      font-weight: bold;
-    }
-  </style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--gradient-main);
+            background-attachment: fixed;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        h1 span {
+            background: var(--gradient-btn);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-clear-btn {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 4px;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+            display: none;
+            width: 24px;
+            height: 24px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-clear-btn:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .search-clear-btn.visible {
+            display: flex;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 16px 24px;
+            border-radius: 30px;
+            border: 2px solid transparent;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            backdrop-filter: blur(10px);
+        }
+
+        input[type="text"]:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--accent-blue);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(70, 227, 214, 0.3);
+            cursor: pointer;
+        }
+
+        .card.selected {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(70, 227, 214, 0.4);
+        }
+
+        .card.hidden {
+            display: none;
+        }
+
+        .card-header {
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            color: #fff;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            background: rgba(51, 197, 244, 0.15);
+            color: var(--accent-cyan);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tag:hover {
+            background: rgba(51, 197, 244, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .back-btn {
+            display: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .back-btn.visible {
+            display: block;
+        }
+
+        /* Room detail view styles */
+        .room-detail {
+            display: none;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px 20px;
+            text-align: center;
+        }
+
+        .room-detail.visible {
+            display: block;
+        }
+
+        .room-detail h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .room-detail .tags {
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .room-detail .description {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        #qrcode {
+            margin: 30px auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        #qrcode img {
+            border-radius: 10px;
+            background: white;
+            padding: 10px;
+        }
+
+        .room-link {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px auto;
+            word-wrap: break-word;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            max-width: 100%;
+            overflow-wrap: break-word;
+        }
+
+        .btn-join-group {
+            background: var(--gradient-btn);
+            color: #0b0d17;
+            text-decoration: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-block;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-join-group:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(70, 227, 214, 0.3);
+        }
+
+        .legal-note {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .legal-note a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+        }
+
+        .legal-note a:hover {
+            text-decoration: underline;
+        }
+
+        .warning-text {
+            color: #ff9800;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .room-detail {
+                padding: 10px 15px;
+            }
+            
+            .room-detail h2 {
+                font-size: 1.5rem;
+            }
+            
+            .btn-join-group {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--text-main);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: var(--text-main);
+        }
+
+        .modal-body {
+            margin-bottom: 25px;
+        }
+
+        .modal-room-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--accent-cyan);
+        }
+
+        .modal-room-desc {
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+
+
+        .btn-cancel {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 700;
+            transition: background 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            display: none;
+        }
+        
+        /* Decoration inspired by background doodle */
+        .bg-doodle {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.2rem; }
+            .container { padding: 10px; }
+        }
+    </style>
 </head>
 <body>
-  <div id="join-container">
-    <h4 class="center-align">Join Keet Room: <br/><span id="room-title"></span></h4>
-    <div class="center-align" id="qrcode"></div>
-    <div class="center-align" id="room-link"></div><br/>
-    <div class="center-align">
-        <a id="join-link" class="cyan accent-4 waves-effect waves-light btn" target="_blank" href="#">Join room with Keet</a>
+
+<div class="bg-doodle"></div>
+
+<header>
+    <button class="back-btn" id="backBtn" onclick="backToList()">← Back to All Groups</button>
+    <h1 id="mainTitle">Keet <span>Groups</span></h1>
+    <div class="subtitle">Direct, encrypted chats with people you trust.</div>
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search groups by name, tag, or description...">
+        <button class="search-clear-btn" id="searchClearBtn" onclick="clearSearch()">×</button>
     </div>
-    <br/>
-    <div class="center-align">
-      <div id="legal-note">
-        <p><a href="#" id="share-room-link">➕ Create a keetlink?</a></p>
-        <text>if haven't installed 🐦, </text><a id="download-link" href="#">Get Keet</a>
-        <p class="warning-text">⚠️ This is not an official service from Keet.io, but you can verify the 
-          <a href="https://github.com/gasolin/keetlink/blob/main/index.html" target="_blank">source</a>.</p>
-      </div>
+</header>
+
+<div class="container" id="roomsContainer">
+    <div class="no-results" id="noResults">No groups found matching your search.</div>
+</div>
+
+<!-- Room Detail View -->
+<div class="room-detail" id="roomDetail">
+    <h2 id="detailRoomName"></h2>
+    <div class="tags" id="detailRoomTags"></div>
+    <p class="description" id="detailRoomDesc"></p>
+    
+    <div id="qrcode"></div>
+    <div class="room-link" id="roomLink"></div>
+    
+    <a id="joinLink" class="btn-join-group" target="_blank" href="#">Join Group with Keet</a>
+    
+    <div class="legal-note">
+        <p>if haven't installed 🐦, <a id="downloadLink" href="#">Get Keet</a></p>
+        <p class="warning-text">⚠️ This is not an official service from Keet.io</p>
     </div>
-  </div>
+</div>
 
-  <!-- Modal Structure -->
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-      <h4>Get Keet</h4>
-      <p>Please download the Keet app first to join the room.</p>
-      <div id="download-options"></div>
-    </div>
-  </div>
+<script>
+    // Data extracted from the provided text
+    const rooms = [
+        {
+            "name": "Pear Community",
+            "description": "A vibrant community where p2p technology enthusiasts gather to discuss their interests.",
+            "key": "yfo4afrc46rkykdue9br5zsiyc917eqqpr9oiy8z19xrfj9ffenx69t7eqaz5uuann7bf3pdih51o3neibf199i8cyb8tyexngxt8ug361rw9k4pgfsfxp7xxpkxoufigkz5e8ddizope3mkx5ix4dp7yapkhye",
+            "tags": ["Official", "Tech", "Community"]
+        },
+        {
+            "name": "Bug Bandits 🐞",
+            "description": "A room to report bugs and collaborate on solutions to improve the app’s performance.",
+            "key": "yfoios17dgbdhoyizg1er4zdsay9admk4oo3meh4j1tawqx4fw5scmysf93per7subcttbhrjuoiriey7b65sh5yrdmhpape7j7f4d7s51kfur9wwwrkwb8ms31n9ro1h467iqq4orw945do88oxztmpfoznnye",
+            "tags": ["Official", "Dev", "Bugs"]
+        },
+        {
+            "name": "Keet News",
+            "description": "A space to get the latest updates on new app features and all things Keet.",
+            "key": "yfo7j69nb4d8sqtbex7p87e5ukiq9mzyuj3rrpxbwmtrx3ba5x3ga7bdr98c1ycomg1kuo3p9zgscrqahbyo7xsgkr4x5k9rerbpjmjxp3h555imc1ug1qyinw9utwf7n5csxq91n9wuf5p5orxmpsk97youaye",
+            "tags": ["Official", "News"]
+        },
+        {
+            "name": "Keet UX lab",
+            "description": "For all Keet users to share ideas, feedback, and test prototypes.",
+            "key": "yfoadnyshwtqr9hubr97wnxi876wnfbe1e7zkjaq5dj5r3f9hbxwyg47ok3o769popks4ri3yw7zsu1ad5ghexqqagnu3xmgo9iym6micmzah7dk4cd8z61rez3wfn8azkujsjfhzfpm7jum8r6533sa1ywyqye",
+            "tags": ["Official", "UX", "Design"]
+        },
+        {
+            "name": "Keet APK",
+            "description": "To get latest keet APK file in keet.",
+            "key": "yfo6nemwt5oik3k3hnadrzbdz4txwdghpdt3zrhrd1wycynkn88keu6anj77ohjd8w3hfdmsbw8pe5mazk5by7tq89s6fz5ihyj47wzic9z55utdbp5ae7d6aj4qmsqph1zdza99gqjr945eamjsrxxfkmuzkye",
+            "tags": ["Official", "Download"]
+        },
+        {
+            "name": "🍐 Pear Development",
+            "description": "Where developers meet to collaborate on building apps within the Pear runtime.",
+            "key": "yfo6dbyb4iz9bhhdq6nzq888dto4b4mxttz94i8ttaidrppwnmtehgn4so6u5jy9cfg41x7aoht5egf8354wjaz7eip5am37ie9ffy3gpq4bngkz35fx4f9zxpeo53qt679q4e8bjazbxoo356pz96c9munhaye",
+            "tags": ["Official", "Dev", "Pear"]
+        },
+        {
+            "name": "Bare Development",
+            "description": "Official Bare development discussion.",
+            "key": "yfohfp78bhckouj59uybdzneeisuuq47jz75rkk36nu86sen4uhh4dafqhjktx6a86zmjafm6q1s1x3hd3ukhbp9yrqprmapwsh87e9ue1zbzc5gahwh6hdjfwegyfdxhr8kq633z96j41em1fgsctwudj5xaye",
+            "tags": ["Official", "Dev"]
+        },
+        {
+            "name": "Pear Releases",
+            "description": "Official Pear releases channel.",
+            "key": "yfot9fi7s5feuz9jc6cxgacycdnrz6besatc5fgrehb9nmxey74mhfh957e5513iuaj4aiyiqbo9ystdxegebcfp4kc6tax7ei1m19shcgzco8a8h8x5hcxtmio6ycyk5kf4zqu4fy1pyus8mj6mqfstj5aryye",
+            "tags": ["Official", "Releases"]
+        },
+        {
+            "name": "Pear baby Room",
+            "description": "Pear apps discussion.",
+            "key": "yfo9g36qbzu1kf8cfczywhz1pm1ocgt54i98z748fj865i66zhpw4ay7fyxmbythqgm4btgybui5t84te8duzqe5bory5yauun4c46ugap95nqt156e6s441md3may33um58qxrczweeab8x1p8a3yk37cfswye",
+            "tags": ["Dev", "Apps"]
+        },
+        {
+            "name": "bitcoin 🔥",
+            "description": "A lively space where Bitcoin enthusiasts share updates, news, and insights about cryptocurrency.",
+            "key": "yfo951jprdyzmfaj9hcxtahif3j3xp31phk1scr3cbo778kr7ghpcxkinyft5cs9m74rt9dcxf71sfxidkxoa7nh6gqr334ik5itkeg3rxyc84b9p7xud81wa375i79epjm8pz63kzkcjiq8f68yumg1syferye",
+            "tags": ["Crypto", "Community"]
+        },
+        {
+            "name": "The Guy Swann Feed 🔥",
+            "description": "Broadcast feed.",
+            "key": "yfouyow4aq95k5u7jfr3qzz691wynxz1g66uwbqwbn735g1ymedgonmn6w938jejzotzaitnatdmoyj36wr1hrtmqrdsn6iukrsqpbgo9kcwt63sk581mcywh6f43y43ybyph133hnu54pwwqpb9pinp1okrhye",
+            "tags": ["Feed", "Community"]
+        },
+        {
+            "name": "Pears Coffee Break 🔥",
+            "description": "Casual community chat.",
+            "key": "yfo3r5xumjb43grehjfkchc7xb5hs8177jy6o3anggagy3az99ku1zpmnhbzjom91c7nmzy3f9rhz1yq4kod7x4ctybkc4a8mkcudeyjktytimn9snem6mth3o4pq7fsjsf489cf9k7dyyo8xt6tyfdmb7kdcye",
+            "tags": ["Community", "Social"]
+        },
+        {
+            "name": "Great Music Finds! 🔥",
+            "description": "Share and discover music.",
+            "key": "yfo4dyhdoi1zqyitsffueh3siw46p3coj9omwnxmqyudw4zjn96geseo6n6n84cuau3ziaj4w9y1cztjpfk6399sga6j61zms3re8hj1abminfa4qz911tgp1ujiryuq36oq5hg5zzm8yf7d36dr614mxzse4ye",
+            "tags": ["Music", "Social"]
+        },
+        {
+            "name": "Interesting Links 🔥",
+            "description": "Share interesting links from around the web.",
+            "key": "yfoazqncuiu9pqr36oc6z13iiwwkt8hwf6yi43k66xearnsdna5i4phucz39g5ti5xo5wbdc3nsixgu3twukt6magtjncdh41mrom13f8xeaakn5njgdqonqcbqucbt3xbcfpgc1rw9ad1dd6d334h6s89yu4ye",
+            "tags": ["Links", "Content"]
+        },
+        {
+            "name": "Holesail 🔥",
+            "description": "Holesail discussion.",
+            "key": "yfo1wq5x8fg5xaxcc845csc5k65kdzcoxsqc58wozi93ty5kr3u114agg8osrafhug57ekkcxwxtp8cdcbhzjn8knkp9d6cm5fk3ua5p58qw1fn3ocqa8bbwn6d4o5c3kf4wniap7ukmwwdos4dne7kjgen6oye",
+            "tags": ["Tech", "Community"]
+        },
+        {
+            "name": "You should C 🔥",
+            "description": "Community chat.",
+            "key": "yfo6ua5k83psppuzb31bco8ugpb349non174beh1sfgtpnqzbuthwy75hmuuc5nzxh5gy5mr985yypzxp6fwnh7fesujsp75fyw7sqkaugj73y1e5zs8ox3usu66k8znfhcm1antigcossfijmbirzafka37kye",
+            "tags": ["Community"]
+        },
+        {
+            "name": "Parent Support Group 🔥",
+            "description": "Support group for parents.",
+            "key": "yfoorrntewnhrqbaynxyyt9m9ykaoihkopznj5pszq438bigaoewczd5cggop5176zjgpy9u74rc63rs41sz3a7x3bb8fitmohf9qx8rec51ihn1cctketb1bmnkuact7bs1ujnnre5ynz33p91wf77urdcdhye",
+            "tags": ["Support", "Social"]
+        },
+        {
+            "name": "Bitcoin Discourse On Social Media 🔥",
+            "description": "Discussion about Bitcoin on social platforms.",
+            "key": "yfoa1yp1hjbt6t3f5quqk9w16rprqucpyn7qfgwkfbuzkg5ei4d164os5sffss93mozf7xtm1bdn7atzcczkg1mytcaw4fnj55bsbbdczo6oznhwtayogdxn1h4nb3auiwtcwpcjipcnqz44hpcsazj8e8ppwye",
+            "tags": ["Crypto", "Social"]
+        },
+        {
+            "name": "RD_btc Meme Dealings 🔥",
+            "description": "Meme sharing and discussion.",
+            "key": "yfo1ekk4fccccecdc5ed1br6eqgd45yc3ow6zgs85ketqhc4msdaor8ut3z74a831n3h16amsa6c51c8e8tsfgaf6sadxf8e6eij54nw1ke4on3odixfk88bkmccs69nf3a3i7gncip3dibp9nhwaq55zj43oye",
+            "tags": ["Memes", "Crypto"]
+        },
+        {
+            "name": "Lain of the Wired 🔥",
+            "description": "Community chat.",
+            "key": "yfosw4knqb7pepqjzacoxjaffd1tyqq9yqiyksqzscfb3t1y5m1s19knexk39mkh3umu15enf3q43uwstji8b9hzaryxeqwddstm7y6546spiuo8y91kynfdkhm4pntnpez5njhsjd1t7aicxtc7kibukkxtoye",
+            "tags": ["Anime", "Community"]
+        },
+        {
+            "name": "Unconquered Sun 🔥",
+            "description": "Community chat.",
+            "key": "yfo9zxu9uip39nephxioau5988c3gud7ggbgi5xm6zi1z1ghdye9ct66s1dtdmje8qwbt4nkh87cickj69xwrdidz5jtbwopm8y98wj14h4ctbq8pb5q5wbdsiccbqfr61wrrye3uj8f84sx4fo6ooyxe6zh4ye",
+            "tags": ["Community"]
+        },
+        {
+            "name": "Pear Сообщество -",
+            "description": "Русский community.",
+            "key": "yfo19kgumsfx6yebdqhfgn5na9qiw1pcxny1dmzwj1s1tsazsyr9rttmz1jbxwdd7zs46kfp8zx4e18gqmxo3tnwu1pu9pm1x3ybnof3owjgsrybtkfwt8fsduuakkoi8w7ziofjk5s5z1h71dwkbg988fkc1ye",
+            "tags": ["Official", "Russian"]
+        },
+        {
+            "name": "Pear Español",
+            "description": "Español community.",
+            "key": "yfozhdeghdhkmq6pjnot38qehk41tfdk7ezdrzop6eg1kf8j4315eytz58e843in9aymk6tbt5iperkhhywu8k4udeemfag6f8gy65edmp48kp4qnmnzw3696gzj1bjc6atomih5g7setfxawckkz9d8com64ye",
+            "tags": ["Official", "Spanish"]
+        },
+        {
+            "name": "Pear Italiano",
+            "description": "Italiano community.",
+            "key": "yfoty8ery1i6q7urd4grpb8jbwu9zs7xitorcg4yypnd3cfzwp16g7k6eeto6z5f3oko3u6174r1taqd3i81p7k8eoy3nsqixar5pf5yraeic1hzdtks1b4nrigg6ug6gekq4tckru1ink6xafrpmit6ng95gye",
+            "tags": ["Official", "Italian"]
+        },
+        {
+            "name": "Pear 中文社区/社群",
+            "description": "Pear 中文社群/社區.",
+            "key": "yfo4epyx159hi9s4abcyqmqf6cx5q5nhiemdr58swhyr1o3pfh8irmki5ismher36udgqwjaxwxrfieyq3rrer4q9a9bq16ifsg6sdjj5g5nj197z4xpepw4s5wcbdan4rx1chmq4ihkxty3p7reggbcp9m1kye",
+            "tags": ["Official", "Chinese"]
+        },
+        {
+            "name": "Nordic Countries 🔥",
+            "description": "Nordic community.",
+            "key": "yfo14gjcb6gq3gfiqucujkn6zs4ymn6snhcz8gywnhu3fdiubjm7cp1ra3tzxh643tbpesi63ownimcpybxtbeb1ac4njf63s1s53hd46zezq85urfsp9sh3usu9y3ct1z6dffcqdscy59s5hjmkcscju8xjwye",
+            "tags": ["Nordic", "Community"]
+        }
+    ];
 
-  <div id="share-room-modal" class="modal">
-    <div class="modal-content">
-      <h4>Keet invite convertor</h4>
-      <div class="input-field">
-        <textarea id="share-room-input" class="materialize-textarea"></textarea>
-        <label for="share-room-input">Paste your room invite here</label>
-      </div>
+    const container = document.getElementById('roomsContainer');
+    const searchInput = document.getElementById('searchInput');
+    const searchClearBtn = document.getElementById('searchClearBtn');
+    const noResults = document.getElementById('noResults');
+    const backBtn = document.getElementById('backBtn');
+    const roomDetail = document.getElementById('roomDetail');
+    let currentSelectedRoom = null;
+    let currentQRCode = null;
 
-      <div class="center-align">
-        <button id="convert-btn" class="cyan accent-4 waves-effect waves-light btn">Convert to Shareable keetlink</button>
-      </div>
+    function renderRooms(filterText = '') {
+        container.innerHTML = '';
+        container.appendChild(noResults);
+        let hasVisible = false;
 
-      <div id="converted-link" class="hide">
-        <h6>Your shareable keetlink:</h6>
-        <div id="converted-link-text" class="input-field">
-          <input type="text" id="share-link-output" readonly>
-        </div>
-        <button id="copy-link-btn" class="waves-effect waves-light btn">Copy Link</button>
-      </div>
+        const lowerFilter = filterText.toLowerCase();
 
-      <div class="center-align">
-        <p><a href="https://github.com/gasolin/keetlink/tree/main?tab=readme-ov-file#how-i-turn-my-invite-link-to-a-web-link" target="_blank">📗 Guide</a></p>
-      </div>
-    </div>
-  </div>
+        rooms.forEach(room => {
+            const matchName = room.name.toLowerCase().includes(lowerFilter);
+            const matchDesc = room.description.toLowerCase().includes(lowerFilter);
+            const matchTag = room.tags.some(tag => tag.toLowerCase().includes(lowerFilter));
 
+<<<<<<< Updated upstream
   <script src="lib/materialize.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@2.0.4/dist/qrcode.js"></script>
   <script>
@@ -157,10 +699,35 @@
             }
           }
         }
+=======
+            if (matchName || matchDesc || matchTag) {
+                hasVisible = true;
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.dataset.roomKey = room.key;
 
-        return params;
-      }
+                const tagsHtml = room.tags.map(tag => `<span class="tag" onclick="event.stopPropagation(); searchByTag('${tag}')">${tag}</span>`).join('');
 
+                card.innerHTML = `
+                    <div>
+                        <div class="card-header">
+                            <h3 class="card-title">${room.name}</h3>
+                            <div class="tags">${tagsHtml}</div>
+                        </div>
+                        <p class="card-desc">${room.description}</p>
+                    </div>
+                `;
+
+                card.addEventListener('click', () => selectRoom(room));
+                container.appendChild(card);
+            }
+        });
+>>>>>>> Stashed changes
+
+        noResults.style.display = hasVisible ? 'none' : 'block';
+    }
+
+<<<<<<< Updated upstream
       // Get parameters from anchor
       const anchorParams = parseAnchor(window.location.hash);
 
@@ -170,9 +737,82 @@
       // Decode URI component only if title exists
       var title = anchorParams.title ? decodeURIComponent(anchorParams.title) :
                 (key ? '' : 'Pear Community');
+=======
+    function selectRoom(room) {
+        currentSelectedRoom = room;
+        
+        // Update URL with anchor
+        window.location.hash = `#${room.key}`;
+        
+        // Hide list view and show detail view
+        container.style.display = 'none';
+        roomDetail.classList.add('visible');
+        
+        // Populate room detail
+        document.getElementById('detailRoomName').textContent = room.name;
+        document.getElementById('detailRoomDesc').textContent = room.description;
+        
+        // Populate tags
+        const tagsContainer = document.getElementById('detailRoomTags');
+        tagsContainer.innerHTML = room.tags.map(tag => `<span class="tag" onclick="event.stopPropagation(); searchByTag('${tag}')">${tag}</span>`).join('');
+        
+        // Generate join link
+        const joinLink = `pear://keet/${room.key}`;
+        document.getElementById('roomLink').textContent = joinLink;
+        document.getElementById('joinLink').href = joinLink;
+        
+        // Generate QR code
+        const qrcodeContainer = document.getElementById("qrcode");
+        
+        // Force clear all previous QR codes
+        qrcodeContainer.innerHTML = '';
+        while (qrcodeContainer.firstChild) {
+            qrcodeContainer.removeChild(qrcodeContainer.firstChild);
+        }
+        
+        // Create a new div for the QR code to ensure clean container
+        const qrDiv = document.createElement('div');
+        qrcodeContainer.appendChild(qrDiv);
+        
+        currentQRCode = new QRCode(qrDiv, {
+            text: joinLink,
+            width: 200,
+            height: 200,
+            correctLevel: QRCode.CorrectLevel.H
+        });
+        
+        // Set download link based on OS
+        setDownloadLink();
+        
+        // Show back button and hide search
+        backBtn.classList.add('visible');
+        searchInput.style.display = 'none';
+        searchClearBtn.style.display = 'none';
+        document.querySelector('.subtitle').style.display = 'none';
+        document.getElementById('mainTitle').style.display = 'none';
+        noResults.style.display = 'none';
+    }
 
-      var joinLink = 'pear://keet/' + key;
+    function searchByTag(tag) {
+        // Go back to list view if in detail view
+        if (currentSelectedRoom) {
+            backToList();
+        }
+        
+        // Set search input to the tag and trigger search
+        searchInput.value = tag;
+        updateSearchClearButton();
+        renderRooms(tag);
+    }
+>>>>>>> Stashed changes
 
+    function clearSearch() {
+        searchInput.value = '';
+        updateSearchClearButton();
+        renderRooms('');
+    }
+
+<<<<<<< Updated upstream
       document.getElementById('room-title').textContent = title;
       document.getElementById('room-link').textContent = joinLink
       document.getElementById('join-link').href = joinLink;
@@ -229,39 +869,92 @@
           shareLinkOutput.value = convertedUrl;
           convertedLinkDiv.classList.remove('hide');
           M.updateTextFields();
+=======
+    function updateSearchClearButton() {
+        if (searchInput.value.trim()) {
+            searchClearBtn.classList.add('visible');
+>>>>>>> Stashed changes
         } else {
-          M.toast({html: 'Please enter a valid Keet room link starting with "pear://keet/"'});
+            searchClearBtn.classList.remove('visible');
         }
-      });
+    }
 
-      copyLinkBtn.addEventListener('click', function() {
-        shareLinkOutput.select();
-        document.execCommand('copy');
-        M.toast({html: 'Link copied to clipboard!'});
-      });
+    function backToList() {
+        currentSelectedRoom = null;
+        
+        // Clear URL hash
+        window.location.hash = '';
+        
+        // Show list view and hide detail view
+        container.style.display = 'grid';
+        roomDetail.classList.remove('visible');
+        
+        // Clear QR code
+        document.getElementById('qrcode').innerHTML = '';
+        currentQRCode = null;
 
-      // Download keet
-      var downloadBtn = document.getElementById('download-link');
-      checkOS();
+        // Hide back button and show search
+        backBtn.classList.remove('visible');
+        searchInput.style.display = 'block';
+        searchClearBtn.style.display = 'flex';
+        updateSearchClearButton();
+        document.querySelector('.subtitle').style.display = 'block';
+        document.getElementById('mainTitle').style.display = 'block';
+        
+        // Re-render to show search results if any
+        renderRooms(searchInput.value);
+    }
 
-      function checkOS() {
-        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-        if (!(/windows|macintosh|mac os x|android|iPad|iPhone|iPod/i.test(userAgent))) {
-          downloadBtn.innerHTML = '<a href="https://keet.io">Get App from Keet.io</a>';
+    // Handle URL hash on page load
+    function handleHashChange() {
+        const hash = window.location.hash.substring(1);
+        if (hash) {
+            const room = rooms.find(r => r.key === hash);
+            if (room) {
+                // Wait for initial render before selecting
+                setTimeout(() => selectRoom(room), 100);
+            }
         }
-        if (/windows/i.test(userAgent)) {
-          downloadBtn.innerHTML = '<a href="https://static.keet.io/downloads/latest/Keet.msix">Get Keet for Windows</a>';
-        } else if (/macintosh|mac os x/i.test(userAgent)) {
-          downloadBtn.innerHTML = '<a href="https://static.keet.io/downloads/latest/Keet-Apple-Silicon.dmg">Get Keet for Apple Silicon</a>';
-        } else if (/android/i.test(userAgent)) {
-          downloadBtn.innerHTML = '<a href="https://play.google.com/store/apps/details?id=io.keet.app">Get Keet from Play Store</a>';
-        } else if (/iPad|iPhone|iPod/i.test(userAgent)) {
-          downloadBtn.innerHTML = '<a href="https://apps.apple.com/us/app/keet-by-holepunch/id6443880549">Get Keet from App Store</a>';
-        } else {
-          downloadBtn.innerHTML = '<a href="https://static.keet.io/downloads/latest/Keet-x64.tar.gz">Get Keet for Linux</a>';
+    }
+
+    searchInput.addEventListener('input', (e) => {
+        updateSearchClearButton();
+        if (!currentSelectedRoom) {
+            renderRooms(e.target.value);
         }
-      }
     });
-  </script>
+
+    window.addEventListener('hashchange', handleHashChange);
+
+    function setDownloadLink() {
+        const downloadBtn = document.getElementById('downloadLink');
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        
+        if (!(/windows|macintosh|mac os x|android|iPad|iPhone|iPod/i.test(userAgent))) {
+            downloadBtn.href = 'https://keet.io';
+            downloadBtn.textContent = 'Get App from Keet.io';
+        } else if (/windows/i.test(userAgent)) {
+            downloadBtn.href = 'https://static.keet.io/downloads/latest/Keet.msix';
+            downloadBtn.textContent = 'Get Keet for Windows';
+        } else if (/macintosh|mac os x/i.test(userAgent)) {
+            downloadBtn.href = 'https://static.keet.io/downloads/latest/Keet-Apple-Silicon.dmg';
+            downloadBtn.textContent = 'Get Keet for Apple Silicon';
+        } else if (/android/i.test(userAgent)) {
+            downloadBtn.href = 'https://play.google.com/store/apps/details?id=io.keet.app';
+            downloadBtn.textContent = 'Get Keet from Play Store';
+        } else if (/iPad|iPhone|iPod/i.test(userAgent)) {
+            downloadBtn.href = 'https://apps.apple.com/us/app/keet-by-holepunch/id6443880549';
+            downloadBtn.textContent = 'Get Keet from App Store';
+        } else {
+            downloadBtn.href = 'https://static.keet.io/downloads/latest/Keet-x64.tar.gz';
+            downloadBtn.textContent = 'Get Keet for Linux';
+        }
+    }
+
+    // Initial render
+    renderRooms();
+    handleHashChange();
+</script>
+
 </body>
 </html>
