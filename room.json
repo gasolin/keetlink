@@ -340,5 +340,11 @@
     "description": "Pear 中文社群/社區.",
     "key": "yfo4epyx159hi9s4abcyqmqf6cx5q5nhiemdr58swhyr1o3pfh8irmki5ismher36udgqwjaxwxrfieyq3rrer4q9a9bq16ifsg6sdjj5g5nj197z4xpepw4s5wcbdan4rx1chmq4ihkxty3p7reggbcp9m1kye",
     "tags": ["Official", "Chinese", "中文"]
+  },
+  {
+    "name": "Holesail ⛵",
+    "description": "peer-to-peer proxy for TCP and UDP ports",
+    "key": "nfo4of1xqm36up7qaf1un7mfih5on41t33ga8znpwhj67y5gs1zq1j349jqy355t3mnek5ei5rzhfaprbf5rx39amyysda1yyf1ap37cq1za65pke8bypzfweb7b61csberxxwmahybu35qxn3zrsnutqynhyyedoddotqg4isfrjrae911pmwcxn7rhr",
+    "tags": ["Port", "Proxy"]
   }
 ]
