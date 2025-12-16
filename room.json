@@ -343,8 +343,14 @@
   },
   {
     "name": "Holesail ⛵",
-    "description": "peer-to-peer proxy for TCP and UDP ports",
+    "description": "Peer-to-peer proxy for TCP and UDP ports",
     "key": "nfo4of1xqm36up7qaf1un7mfih5on41t33ga8znpwhj67y5gs1zq1j349jqy355t3mnek5ei5rzhfaprbf5rx39amyysda1yyf1ap37cq1za65pke8bypzfweb7b61csberxxwmahybu35qxn3zrsnutqynhyyedoddotqg4isfrjrae911pmwcxn7rhr",
     "tags": ["Port", "Proxy"]
+  },
+  {
+    "name": "AI Music Hub 🎵",
+    "description": "Place for music creators to connect",
+    "key": "nfo6fujnc9aatmdfgeopnnp5o3tbijjpznts4n17tip6foeaf9rqyzq6drhto6mxx5pwguge7m7uneaytxfopxgwc5uyuhwx8139boryp8x8iokhqfoknq87wuxguwz6ebb1ucs1o68kpef7hn4ibd3zbi5ynyedrkpnp1i7pkay1gd6n6d3pn8pujfcr",
+    "tags": ["AI", "Music"]
   }
 ]
