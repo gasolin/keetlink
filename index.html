@@ -557,11 +557,20 @@
     function selectRoom(room) {
         currentSelectedRoom = room;
         
-        // Update URL with anchor (preserve title parameter if exists)
+        // Update URL with anchor (preserve title and build parameters if exist)
         let urlHash = `#${room.key}`;
+        const queryParams = parseUrlParameters();
+        
         if (room.isTemporary && room.name !== 'Unknown Group') {
             urlHash += `&title=${encodeURIComponent(room.name)}`;
+        } else if (queryParams.title) {
+            urlHash += `&title=${encodeURIComponent(queryParams.title)}`;
         }
+        
+        if (queryParams.build) {
+            urlHash += `&build=${queryParams.build}`;
+        }
+        
         window.location.hash = urlHash;
         
         // Hide list view and show detail view
