@@ -364,5 +364,11 @@
     "description": "Gaming news, releases and community chat.",
     "key": "nfo48ei19gg1gw8ih3cu8rpw6wc9nstxb56jogzh9asa3nkchdqthjcxdcrtjgettbfnpzxirona5uketw37wjubpsc86qae3y4sayae9ufmh5ooz85rhn6j5ocjmgejw6sh85bsxxut57tafoxrpj8td4txayedtjnjgnnjaetn1iiuafinrkkssq4hg",
     "tags": ["password", "identity"]
+  },
+  {
+    "name": "Bitcoin Mining ⛏️",
+    "description": "Bitcoin Mining relate discussions.",
+    "key": "nfo5pqmsuob539ci7ao4yqz57bm5zdinibt9ppsosmtwyemdche1w4tij3p6fiynsz74saqmjfpjwgac4fef73rrfppde6m1np9qa59hi9o7kuax73r7xs77iy9zfaryn7mg7s5c9ygddcm7qg55o3wc451gnyedrewipc7zpjys34hcj8bftto3itgcr",
+    "tags": ["Bitcoin", "Mining"]
   }
 ]
