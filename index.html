@@ -563,11 +563,11 @@
         
         if (room.isTemporary && room.name !== 'Unknown Group') {
             urlHash += `&title=${encodeURIComponent(room.name)}`;
-        } else if (queryParams.title) {
+        } else if (queryParams && queryParams.title) {
             urlHash += `&title=${encodeURIComponent(queryParams.title)}`;
         }
         
-        if (queryParams.build) {
+        if (queryParams && queryParams.build) {
             urlHash += `&build=${queryParams.build}`;
         }
         
@@ -591,10 +591,9 @@
         }
         
         // Generate join link with build parameter support
-        const queryParams = parseUrlParameters();
         let joinLink = `pear://keet/${room.key}`;
         
-        if (queryParams.build) {
+        if (queryParams && queryParams.build) {
             switch (queryParams.build) {
                 case 'int':
                     joinLink = `pearint://keet/${room.key}`;
@@ -616,7 +615,7 @@
         // Remove any existing build classes
         joinButton.classList.remove('build-int', 'build-exp');
         
-        if (queryParams.build) {
+        if (queryParams && queryParams.build) {
             switch (queryParams.build) {
                 case 'int':
                     joinButton.classList.add('build-int');
