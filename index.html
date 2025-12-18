@@ -280,6 +280,24 @@
             box-shadow: 0 10px 25px rgba(70, 227, 214, 0.3);
         }
 
+        .btn-join-group.build-int {
+            background: linear-gradient(90deg, #ffd700 0%, #ffed4e 100%);
+            color: #333;
+        }
+
+        .btn-join-group.build-int:hover {
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .btn-join-group.build-exp {
+            background: linear-gradient(90deg, #00ff00 0%, #32cd32 100%);
+            color: #fff;
+        }
+
+        .btn-join-group.build-exp:hover {
+            box-shadow: 0 10px 25px rgba(0, 255, 0, 0.3);
+        }
+
         .legal-note {
             margin-top: 40px;
             text-align: center;
@@ -563,10 +581,45 @@
             tagsContainer.innerHTML = room.tags.map(tag => `<span class="tag" onclick="event.stopPropagation(); searchByTag('${tag}')">${tag}</span>`).join('');
         }
         
-        // Generate join link
-        const joinLink = `pear://keet/${room.key}`;
+        // Generate join link with build parameter support
+        const queryParams = parseUrlParameters();
+        let joinLink = `pear://keet/${room.key}`;
+        
+        if (queryParams.build) {
+            switch (queryParams.build) {
+                case 'int':
+                    joinLink = `pearint://keet/${room.key}`;
+                    break;
+                case 'exp':
+                    joinLink = `pearexp://keet/${room.key}`;
+                    break;
+                default:
+                    // Keep original pear:// for invalid build values
+                    break;
+            }
+        }
+        
         document.getElementById('roomLink').textContent = joinLink;
         document.getElementById('joinLink').href = joinLink;
+        
+        // Update button styling based on build parameter
+        const joinButton = document.getElementById('joinLink');
+        // Remove any existing build classes
+        joinButton.classList.remove('build-int', 'build-exp');
+        
+        if (queryParams.build) {
+            switch (queryParams.build) {
+                case 'int':
+                    joinButton.classList.add('build-int');
+                    break;
+                case 'exp':
+                    joinButton.classList.add('build-exp');
+                    break;
+                default:
+                    // Keep default styling for invalid build values
+                    break;
+            }
+        }
         
         // Generate QR code
         const qrcodeContainer = document.getElementById("qrcode");
