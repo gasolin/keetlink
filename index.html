@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keet Groups Directory</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://unpkg.com/qrcode-generator@2.0.4/dist/qrcode.js"></script>
     <style>
         :root {
             --bg-dark: #0f111a;
@@ -629,7 +629,7 @@
             }
         }
         
-        // Generate QR code
+        // Generate QR code using qrcode-generator
         const qrcodeContainer = document.getElementById("qrcode");
         
         // Force clear all previous QR codes
@@ -638,16 +638,35 @@
             qrcodeContainer.removeChild(qrcodeContainer.firstChild);
         }
         
-        // Create a new div for the QR code to ensure clean container
-        const qrDiv = document.createElement('div');
-        qrcodeContainer.appendChild(qrDiv);
+        // Generate QR code with error correction level 'H' (high)
+        const qr = qrcode(0, 'H');
+        qr.addData(joinLink);
+        qr.make();
         
-        currentQRCode = new QRCode(qrDiv, {
-            text: joinLink,
-            width: 200,
-            height: 200,
-            correctLevel: QRCode.CorrectLevel.H
-        });
+        // Create SVG element for the QR code
+        const size = 200;
+        const cellSize = Math.floor(size / qr.getModuleCount());
+        const margin = Math.floor((size - qr.getModuleCount() * cellSize) / 2);
+        
+        let svgString = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">';
+        svgString += '<rect width="100%" height="100%" fill="white"/>';
+        svgString += '<g transform="translate(' + margin + ',' + margin + ')">';
+        
+        for (let row = 0; row < qr.getModuleCount(); row++) {
+            for (let col = 0; col < qr.getModuleCount(); col++) {
+                if (qr.isDark(row, col)) {
+                    svgString += '<rect x="' + (col * cellSize) + '" y="' + (row * cellSize) + '" width="' + cellSize + '" height="' + cellSize + '" fill="black"/>';
+                }
+            }
+        }
+        
+        svgString += '</g></svg>';
+        
+        // Set the SVG as the innerHTML of the container
+        qrcodeContainer.innerHTML = svgString;
+        
+        // Store the QR data reference (for potential future use)
+        currentQRCode = qr;
         
         // Set download link based on OS
         setDownloadLink();
