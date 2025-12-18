@@ -654,22 +654,36 @@
 
     // Parse URL parameters
     function parseUrlParameters() {
-        const hash = window.location.hash.substring(1);
-        if (!hash) return null;
-
-        // Split hash and query parameters
-        const [roomKey, ...queryParts] = hash.split('&');
-        const params = { key: roomKey };
+        const params = {};
         
-        // Parse query parameters
-        queryParts.forEach(part => {
-            const [key, value] = part.split('=');
-            if (key && value) {
-                params[key] = decodeURIComponent(value);
-            }
-        });
-
-        return params;
+        // Parse hash parameters
+        const hash = window.location.hash.substring(1);
+        if (hash) {
+            // Split hash and query parameters
+            const [roomKey, ...queryParts] = hash.split('&');
+            params.key = roomKey;
+            
+            // Parse query parameters from hash
+            queryParts.forEach(part => {
+                const [key, value] = part.split('=');
+                if (key && value) {
+                    params[key] = decodeURIComponent(value);
+                }
+            });
+        }
+        
+        // Parse URL search parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('title')) {
+            params.title = urlParams.get('title');
+        }
+        
+        if (urlParams.has('build')) {
+            params.build = urlParams.get('build');
+        }
+        
+        // Return null if no parameters found
+        return Object.keys(params).length > 0 ? params : null;
     }
 
     // Handle URL hash on page load
