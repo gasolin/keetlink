@@ -314,6 +314,65 @@
             text-decoration: underline;
         }
 
+        .app-download-section {
+            margin-top: 30px;
+            padding: 25px;
+            /* background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1); */
+        }
+
+        .app-download-title {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .download-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn-download {
+            background: transparent;
+            color: var(--accent-cyan);
+            border: 1px solid var(--accent-cyan);
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 400;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .btn-download:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(70, 227, 214, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            .app-download-section {
+                padding: 20px;
+                margin-top: 25px;
+            }
+            
+            .btn-download {
+                min-width: 180px;
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
         .warning-text {
             color: #ff9800;
             font-weight: bold;
@@ -482,8 +541,15 @@
     
     <a id="joinLink" class="btn-join-group" target="_blank" href="#">Join Group with Keet</a>
     
+    <div class="app-download-section">
+        <div class="app-download-title">To join this secure, peer-to-peer chat, you'll need the Keet app</div>
+        <div class="download-buttons">
+            <a id="downloadLink" class="btn-download" href="#">Get Keet</a>
+            <a id="downloadLink" class="btn-download" href="https://keet.io/download/" taget="_blank">Other platforms</a>
+        </div>
+    </div>
+    
     <div class="legal-note">
-        <p>if haven't installed 🐦, <a id="downloadLink" href="#">Get Keet</a></p>
         <p class="warning-text">⚠️ This is not an official service from Keet.io</p>
     </div>
 </div>
@@ -802,23 +868,23 @@
         const userAgent = navigator.userAgent || navigator.vendor || window.opera;
         
         if (!(/windows|macintosh|mac os x|android|iPad|iPhone|iPod/i.test(userAgent))) {
-            downloadBtn.href = 'https://keet.io';
-            downloadBtn.textContent = 'Get App from Keet.io';
+            downloadBtn.href = 'https://keet.io/download';
+            downloadBtn.textContent = 'Keet.io';
         } else if (/windows/i.test(userAgent)) {
             downloadBtn.href = 'https://static.keet.io/downloads/latest/Keet.msix';
-            downloadBtn.textContent = 'Get Keet for Windows';
+            downloadBtn.textContent = 'Windows';
         } else if (/macintosh|mac os x/i.test(userAgent)) {
             downloadBtn.href = 'https://static.keet.io/downloads/latest/Keet-Apple-Silicon.dmg';
-            downloadBtn.textContent = 'Get Keet for Apple Silicon';
+            downloadBtn.textContent = 'Apple Silicon';
         } else if (/android/i.test(userAgent)) {
             downloadBtn.href = 'https://play.google.com/store/apps/details?id=io.keet.app';
-            downloadBtn.textContent = 'Get Keet from Play Store';
+            downloadBtn.textContent = 'Android';
         } else if (/iPad|iPhone|iPod/i.test(userAgent)) {
             downloadBtn.href = 'https://apps.apple.com/us/app/keet-by-holepunch/id6443880549';
-            downloadBtn.textContent = 'Get Keet from App Store';
+            downloadBtn.textContent = 'iOS';
         } else {
             downloadBtn.href = 'https://static.keet.io/downloads/latest/Keet-x64.tar.gz';
-            downloadBtn.textContent = 'Get Keet for Linux';
+            downloadBtn.textContent = 'Linux';
         }
     }
 
