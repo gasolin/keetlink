@@ -545,7 +545,7 @@
         <div class="app-download-title">To join this secure, peer-to-peer chat, you'll need the Keet app</div>
         <div class="download-buttons">
             <a id="downloadLink" class="btn-download" href="#">Get Keet</a>
-            <a id="downloadLink" class="btn-download" href="https://keet.io/download/" taget="_blank">Other platforms</a>
+            <a class="btn-download" href="https://keet.io/download/" target="_blank">Other platforms</a>
         </div>
     </div>
     
@@ -865,27 +865,37 @@
 
     function setDownloadLink() {
         const downloadBtn = document.getElementById('downloadLink');
-        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        if (!downloadBtn) return;
         
-        if (!(/windows|macintosh|mac os x|android|iPad|iPhone|iPod/i.test(userAgent))) {
-            downloadBtn.href = 'https://keet.io/download';
-            downloadBtn.textContent = 'Keet.io';
-        } else if (/windows/i.test(userAgent)) {
-            downloadBtn.href = 'https://static.keet.io/downloads/latest/Keet.msix';
-            downloadBtn.textContent = 'Windows';
-        } else if (/macintosh|mac os x/i.test(userAgent)) {
-            downloadBtn.href = 'https://static.keet.io/downloads/latest/Keet-Apple-Silicon.dmg';
-            downloadBtn.textContent = 'Apple Silicon';
-        } else if (/android/i.test(userAgent)) {
-            downloadBtn.href = 'https://play.google.com/store/apps/details?id=io.keet.app';
-            downloadBtn.textContent = 'Android';
-        } else if (/iPad|iPhone|iPod/i.test(userAgent)) {
-            downloadBtn.href = 'https://apps.apple.com/us/app/keet-by-holepunch/id6443880549';
-            downloadBtn.textContent = 'iOS';
-        } else {
-            downloadBtn.href = 'https://static.keet.io/downloads/latest/Keet-x64.tar.gz';
-            downloadBtn.textContent = 'Linux';
+        const ua = navigator.userAgent.toLowerCase();
+        
+        // Default fallback
+        let href = 'https://keet.io/download';
+        let label = 'Download Keet';
+
+        if (/windows|win64|win32/.test(ua)) {
+            href = 'https://static.keet.io/downloads/latest/Keet.msix';
+            label = 'Download for Windows';
+        } 
+        else if (/macintosh|mac os x/.test(ua)) {
+            href = 'https://static.keet.io/downloads/latest/Keet.dmg';
+            label = 'Download for MacOS';
+        } 
+        else if (/android/.test(ua)) {
+            href = 'https://play.google.com/store/apps/details?id=io.keet.app';
+            label = 'Get it on Google Play';
+        } 
+        else if (/iphone|ipad|ipod/.test(ua)) {
+            href = 'https://apps.apple.com/us/app/keet-by-holepunch/id6443880549';
+            label = 'Download on App Store';
+        } 
+        else if (/linux/.test(ua)) {
+            href = 'https://static.keet.io/downloads/latest/Keet-x64.tar.gz';
+            label = 'Download for Linux';
         }
+
+        downloadBtn.href = href;
+        downloadBtn.textContent = label;
     }
 
     // Initialize the app
@@ -893,6 +903,7 @@
         await loadRooms();
         renderRooms();
         handleHashChange();
+        setDownloadLink(); // Initialize the link for the first time
     }
     
     // Start the app
