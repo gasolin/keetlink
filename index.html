@@ -866,32 +866,34 @@
     function setDownloadLink() {
         const downloadBtn = document.getElementById('downloadLink');
         if (!downloadBtn) return;
-        
+
         const ua = navigator.userAgent.toLowerCase();
-        
+
+        // 1. Detect iOS (iPhone/iPod)
+        const isIOS = /iPad|iPhone|iPod/.test(ua)
+        // 2. Detect iPad acting as a Mac (iPadOS 13+)
+        const isMac = /Macintosh|Mac OS X/.test(ua);
+        const isIPadOS = isMac && navigator.maxTouchPoints > 1;
+
         // Default fallback
         let href = 'https://keet.io/download';
         let label = 'Download Keet';
 
-        if (/windows|win64|win32/.test(ua)) {
-            href = 'https://static.keet.io/downloads/latest/Keet.msix';
-            label = 'Download for Windows';
-        } 
-        else if (/macintosh|mac os x/.test(ua)) {
-            href = 'https://static.keet.io/downloads/latest/Keet.dmg';
-            label = 'Download for MacOS';
-        } 
-        else if (/android/.test(ua)) {
-            href = 'https://play.google.com/store/apps/details?id=io.keet.app';
-            label = 'Get it on Google Play';
-        } 
-        else if (/iphone|ipad|ipod/.test(ua)) {
+        if (isIOS || isIPadOS) {
             href = 'https://apps.apple.com/us/app/keet-by-holepunch/id6443880549';
             label = 'Download on App Store';
-        } 
-        else if (/linux/.test(ua)) {
-            href = 'https://static.keet.io/downloads/latest/Keet-x64.tar.gz';
-            label = 'Download for Linux';
+        } else if (/android/.test(ua)) {
+            href = 'https://play.google.com/store/apps/details?id=io.keet.app';
+            label = 'Download on Google Play';
+        } else if (/windows|win64|win32/.test(ua)) {
+            href = 'https://static.keet.io/downloads/latest/Keet.msix';
+            label = 'Download for Windows';
+        } else if (isMac) {
+            href = 'https://static.keet.io/downloads/latest/Keet.dmg';
+            label = 'Download for MacOS';
+        } else {
+            downloadBtn.href = 'https://static.keet.io/downloads/latest/Keet-x64.tar.gz';
+            downloadBtn.textContent = 'Get Keet for Linux';
         }
 
         downloadBtn.href = href;
