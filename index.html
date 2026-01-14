@@ -562,6 +562,25 @@
         </div>
     </div>
 
+    <!-- Join Confirmation Modal -->
+    <div id="joinModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Open in Keet?</h3>
+                <button class="close-btn" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <p>Do you want to open <span id="modalRoomName" class="modal-room-name"></span> in the Keet app?</p>
+                <p class="modal-room-desc">This will attempt to launch the Keet desktop or mobile application.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+                <button id="confirmJoinBtn" class="btn-join-group" style="margin: 0; padding: 10px 25px;">Open
+                    Keet</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Load rooms from room.json file
         let rooms = [];
@@ -753,9 +772,31 @@
             document.getElementById('mainTitle').style.display = 'none';
             noResults.style.display = 'none';
 
-            // Auto-redirect to the app
+            // Show join confirmation modal
             if (joinLink) {
+                showJoinModal(room, joinLink);
+            }
+        }
+
+        function showJoinModal(room, joinLink) {
+            const modal = document.getElementById('joinModal');
+            document.getElementById('modalRoomName').textContent = room.name;
+            const confirmBtn = document.getElementById('confirmJoinBtn');
+            confirmBtn.onclick = () => {
                 window.location.href = joinLink;
+                closeModal();
+            };
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('joinModal').style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            const modal = document.getElementById('joinModal');
+            if (event.target == modal) {
+                closeModal();
             }
         }
 
