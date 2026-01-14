@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,6 +42,7 @@
         h1 span {
             background: var(--gradient-btn);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -365,7 +367,7 @@
                 padding: 20px;
                 margin-top: 25px;
             }
-            
+
             .btn-download {
                 min-width: 180px;
                 padding: 10px 20px;
@@ -383,11 +385,11 @@
             .room-detail {
                 padding: 10px 15px;
             }
-            
+
             .room-detail h2 {
                 font-size: 1.5rem;
             }
-            
+
             .btn-join-group {
                 padding: 12px 30px;
                 font-size: 1rem;
@@ -493,7 +495,7 @@
             font-size: 1.2rem;
             display: none;
         }
-        
+
         /* Decoration inspired by background doodle */
         .bg-doodle {
             position: fixed;
@@ -507,102 +509,108 @@
         }
 
         @media (max-width: 600px) {
-            h1 { font-size: 2.2rem; }
-            .container { padding: 10px; }
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .container {
+                padding: 10px;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<div class="bg-doodle"></div>
+    <div class="bg-doodle"></div>
 
-<header>
-    <button class="back-btn" id="backBtn" onclick="backToList()">← Back to All Groups</button>
-    <h1 id="mainTitle">Keet <span>Groups</span></h1>
-    <div class="subtitle">Direct, encrypted chats with people you trust.</div>
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search groups by name, tag, or description...">
-        <button class="search-clear-btn" id="searchClearBtn" onclick="clearSearch()">×</button>
+    <header>
+        <button class="back-btn" id="backBtn" onclick="backToList()">← Back to All Groups</button>
+        <h1 id="mainTitle">Keet <span>Groups</span></h1>
+        <div class="subtitle">Direct, encrypted chats with people you trust.</div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search groups by name, tag, or description...">
+            <button class="search-clear-btn" id="searchClearBtn" onclick="clearSearch()">×</button>
+        </div>
+    </header>
+
+    <div class="container" id="roomsContainer">
+        <div class="no-results" id="noResults">No groups found matching your search.</div>
     </div>
-</header>
 
-<div class="container" id="roomsContainer">
-    <div class="no-results" id="noResults">No groups found matching your search.</div>
-</div>
+    <!-- Room Detail View -->
+    <div class="room-detail" id="roomDetail">
+        <h2 id="detailRoomName"></h2>
+        <div class="tags" id="detailRoomTags"></div>
+        <p class="description" id="detailRoomDesc"></p>
 
-<!-- Room Detail View -->
-<div class="room-detail" id="roomDetail">
-    <h2 id="detailRoomName"></h2>
-    <div class="tags" id="detailRoomTags"></div>
-    <p class="description" id="detailRoomDesc"></p>
-    
-    <div id="qrcode"></div>
-    <div class="room-link" id="roomLink"></div>
-    
-    <a id="joinLink" class="btn-join-group" target="_blank" href="#">Join Group with Keet</a>
-    
-    <div class="app-download-section">
-        <div class="app-download-title">To join this secure, peer-to-peer chat, you'll need the Keet app</div>
-        <div class="download-buttons">
-            <a id="downloadLink" class="btn-download" href="#">Get Keet</a>
-            <a class="btn-download" href="https://keet.io/download/" target="_blank">Other platforms</a>
+        <div id="qrcode"></div>
+        <div class="room-link" id="roomLink"></div>
+
+        <a id="joinLink" class="btn-join-group" target="_blank" href="#">Join Group with Keet</a>
+
+        <div class="app-download-section">
+            <div class="app-download-title">To join this secure, peer-to-peer chat, you'll need the Keet app</div>
+            <div class="download-buttons">
+                <a id="downloadLink" class="btn-download" href="#">Get Keet</a>
+                <a class="btn-download" href="https://keet.io/download/" target="_blank">Other platforms</a>
+            </div>
+        </div>
+
+        <div class="legal-note">
+            <p class="warning-text">⚠️ This is not an official service from Keet.io</p>
         </div>
     </div>
-    
-    <div class="legal-note">
-        <p class="warning-text">⚠️ This is not an official service from Keet.io</p>
-    </div>
-</div>
 
-<script>
-    // Load rooms from room.json file
-    let rooms = [];
-    
-    async function loadRooms() {
-        try {
-            const response = await fetch('room.json');
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+    <script>
+        // Load rooms from room.json file
+        let rooms = [];
+
+        async function loadRooms() {
+            try {
+                const response = await fetch('room.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                rooms = await response.json();
+                console.log('Rooms loaded successfully:', rooms.length, 'rooms');
+            } catch (error) {
+                console.error('Error loading rooms:', error);
+                // Fallback to empty array if loading fails
+                rooms = [];
             }
-            rooms = await response.json();
-            console.log('Rooms loaded successfully:', rooms.length, 'rooms');
-        } catch (error) {
-            console.error('Error loading rooms:', error);
-            // Fallback to empty array if loading fails
-            rooms = [];
         }
-    }
 
-    const container = document.getElementById('roomsContainer');
-    const searchInput = document.getElementById('searchInput');
-    const searchClearBtn = document.getElementById('searchClearBtn');
-    const noResults = document.getElementById('noResults');
-    const backBtn = document.getElementById('backBtn');
-    const roomDetail = document.getElementById('roomDetail');
-    let currentSelectedRoom = null;
-    let currentQRCode = null;
+        const container = document.getElementById('roomsContainer');
+        const searchInput = document.getElementById('searchInput');
+        const searchClearBtn = document.getElementById('searchClearBtn');
+        const noResults = document.getElementById('noResults');
+        const backBtn = document.getElementById('backBtn');
+        const roomDetail = document.getElementById('roomDetail');
+        let currentSelectedRoom = null;
+        let currentQRCode = null;
 
-    function renderRooms(filterText = '') {
-        container.innerHTML = '';
-        container.appendChild(noResults);
-        let hasVisible = false;
+        function renderRooms(filterText = '') {
+            container.innerHTML = '';
+            container.appendChild(noResults);
+            let hasVisible = false;
 
-        const lowerFilter = filterText.toLowerCase();
+            const lowerFilter = filterText.toLowerCase();
 
-        rooms.forEach(room => {
-            const matchName = room.name.toLowerCase().includes(lowerFilter);
-            const matchDesc = room.description.toLowerCase().includes(lowerFilter);
-            const matchTag = room.tags.some(tag => tag.toLowerCase().includes(lowerFilter));
+            rooms.forEach(room => {
+                const matchName = room.name.toLowerCase().includes(lowerFilter);
+                const matchDesc = room.description.toLowerCase().includes(lowerFilter);
+                const matchTag = room.tags.some(tag => tag.toLowerCase().includes(lowerFilter));
 
-            if (matchName || matchDesc || matchTag) {
-                hasVisible = true;
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.dataset.roomKey = room.key;
+                if (matchName || matchDesc || matchTag) {
+                    hasVisible = true;
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.dataset.roomKey = room.key;
 
-                const tagsHtml = room.tags.map(tag => `<span class="tag" onclick="event.stopPropagation(); searchByTag('${tag}')">${tag}</span>`).join('');
+                    const tagsHtml = room.tags.map(tag => `<span class="tag" onclick="event.stopPropagation(); searchByTag('${tag}')">${tag}</span>`).join('');
 
-                card.innerHTML = `
+                    card.innerHTML = `
                     <div>
                         <div class="card-header">
                             <h3 class="card-title">${room.name}</h3>
@@ -612,305 +620,311 @@
                     </div>
                 `;
 
-                card.addEventListener('click', () => selectRoom(room));
-                container.appendChild(card);
+                    card.addEventListener('click', () => selectRoom(room));
+                    container.appendChild(card);
+                }
+            });
+
+            noResults.style.display = hasVisible ? 'none' : 'block';
+        }
+
+        function selectRoom(room) {
+            currentSelectedRoom = room;
+
+            // Update URL with anchor (preserve title and build parameters if exist)
+            let urlHash = `#${room.key}`;
+            const queryParams = parseUrlParameters();
+
+            if (room.isTemporary && room.name !== 'Unknown Group') {
+                urlHash += `&title=${encodeURIComponent(room.name)}`;
+            } else if (queryParams && queryParams.title) {
+                urlHash += `&title=${encodeURIComponent(queryParams.title)}`;
+            }
+
+            if (queryParams && queryParams.build) {
+                urlHash += `&build=${queryParams.build}`;
+            }
+
+            window.location.hash = urlHash;
+
+            // Hide list view and show detail view
+            container.style.display = 'none';
+            roomDetail.classList.add('visible');
+
+            // Populate room detail
+            document.getElementById('detailRoomName').textContent = room.name;
+            document.getElementById('detailRoomDesc').textContent = room.description;
+
+            // Populate tags
+            const tagsContainer = document.getElementById('detailRoomTags');
+            if (room.isTemporary) {
+                // For temporary rooms, show non-clickable tag with orange background
+                tagsContainer.innerHTML = `<span class="tag" style="cursor: default; color: #ff9800">This Group does not in catalog</span>`;
+            } else {
+                tagsContainer.innerHTML = room.tags.map(tag => `<span class="tag" onclick="event.stopPropagation(); searchByTag('${tag}')">${tag}</span>`).join('');
+            }
+
+            // Generate join link with build parameter support
+            let joinLink = `pear://keet/${room.key}`;
+
+            if (queryParams && queryParams.build) {
+                switch (queryParams.build) {
+                    case 'int':
+                        joinLink = `pearint://keet/${room.key}`;
+                        break;
+                    case 'exp':
+                        joinLink = `pearexp://keet/${room.key}`;
+                        break;
+                    default:
+                        // Keep original pear:// for invalid build values
+                        break;
+                }
+            }
+
+            document.getElementById('roomLink').textContent = joinLink;
+            document.getElementById('joinLink').href = joinLink;
+
+            // Update button styling based on build parameter
+            const joinButton = document.getElementById('joinLink');
+            // Remove any existing build classes
+            joinButton.classList.remove('build-int', 'build-exp');
+
+            if (queryParams && queryParams.build) {
+                switch (queryParams.build) {
+                    case 'int':
+                        joinButton.classList.add('build-int');
+                        break;
+                    case 'exp':
+                        joinButton.classList.add('build-exp');
+                        break;
+                    default:
+                        // Keep default styling for invalid build values
+                        break;
+                }
+            }
+
+            // Generate QR code using qrcode-generator
+            const qrcodeContainer = document.getElementById("qrcode");
+
+            // Force clear all previous QR codes
+            qrcodeContainer.innerHTML = '';
+            while (qrcodeContainer.firstChild) {
+                qrcodeContainer.removeChild(qrcodeContainer.firstChild);
+            }
+
+            // Generate QR code with error correction level 'H' (high)
+            const qr = qrcode(0, 'H');
+            qr.addData(joinLink);
+            qr.make();
+
+            // Create SVG element for the QR code
+            const size = 200;
+            const cellSize = Math.floor(size / qr.getModuleCount());
+            const margin = Math.floor((size - qr.getModuleCount() * cellSize) / 2);
+
+            let svgString = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">';
+            svgString += '<rect width="100%" height="100%" fill="white"/>';
+            svgString += '<g transform="translate(' + margin + ',' + margin + ')">';
+
+            for (let row = 0; row < qr.getModuleCount(); row++) {
+                for (let col = 0; col < qr.getModuleCount(); col++) {
+                    if (qr.isDark(row, col)) {
+                        svgString += '<rect x="' + (col * cellSize) + '" y="' + (row * cellSize) + '" width="' + cellSize + '" height="' + cellSize + '" fill="black"/>';
+                    }
+                }
+            }
+
+            svgString += '</g></svg>';
+
+            // Set the SVG as the innerHTML of the container
+            qrcodeContainer.innerHTML = svgString;
+
+            // Store the QR data reference (for potential future use)
+            currentQRCode = qr;
+
+            // Set download link based on OS
+            setDownloadLink();
+
+            // Show back button and hide search
+            backBtn.classList.add('visible');
+            searchInput.style.display = 'none';
+            searchClearBtn.style.display = 'none';
+            document.querySelector('.subtitle').style.display = 'none';
+            document.getElementById('mainTitle').style.display = 'none';
+            noResults.style.display = 'none';
+
+            // Auto-redirect to the app
+            if (joinLink) {
+                window.location.href = joinLink;
+            }
+        }
+
+        function searchByTag(tag) {
+            // Go back to list view if in detail view
+            if (currentSelectedRoom) {
+                backToList();
+            }
+
+            // Set search input to the tag and trigger search
+            searchInput.value = tag;
+            updateSearchClearButton();
+            renderRooms(tag);
+        }
+
+        function clearSearch() {
+            searchInput.value = '';
+            updateSearchClearButton();
+            renderRooms('');
+        }
+
+        function updateSearchClearButton() {
+            if (searchInput.value.trim()) {
+                searchClearBtn.classList.add('visible');
+            } else {
+                searchClearBtn.classList.remove('visible');
+            }
+        }
+
+        function backToList() {
+            currentSelectedRoom = null;
+
+            // Clear URL hash and query parameters
+            window.history.pushState("", document.title, window.location.pathname + window.location.search);
+
+            // Show list view and hide detail view
+            container.style.display = 'grid';
+            roomDetail.classList.remove('visible');
+
+            // Clear QR code
+            document.getElementById('qrcode').innerHTML = '';
+            currentQRCode = null;
+
+            // Hide back button and show search
+            backBtn.classList.remove('visible');
+            searchInput.style.display = 'block';
+            searchClearBtn.style.display = 'flex';
+            updateSearchClearButton();
+            document.querySelector('.subtitle').style.display = 'block';
+            document.getElementById('mainTitle').style.display = 'block';
+
+            // Re-render to show search results if any
+            renderRooms(searchInput.value);
+        }
+
+        // Parse URL parameters
+        function parseUrlParameters() {
+            const params = {};
+
+            // Parse hash parameters
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                // Split hash and query parameters
+                const [roomKey, ...queryParts] = hash.split('&');
+                params.key = roomKey;
+
+                // Parse query parameters from hash
+                queryParts.forEach(part => {
+                    const [key, value] = part.split('=');
+                    if (key && value) {
+                        params[key] = decodeURIComponent(value);
+                    }
+                });
+            }
+
+            // Parse URL search parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('title')) {
+                params.title = urlParams.get('title');
+            }
+
+            if (urlParams.has('build')) {
+                params.build = urlParams.get('build');
+            }
+
+            // Return null if no parameters found
+            return Object.keys(params).length > 0 ? params : null;
+        }
+
+        // Handle URL hash on page load
+        function handleHashChange() {
+            const params = parseUrlParameters();
+            if (params && params.key) {
+                const room = rooms.find(r => r.key === params.key);
+                if (room) {
+                    // Wait for initial render before selecting
+                    setTimeout(() => selectRoom(room), 100);
+                } else {
+                    // Room not found in catalog, create a temporary room object
+                    const tempRoom = {
+                        name: params.title || 'Unknown Group',
+                        description: 'This group is not in the catalog.',
+                        key: params.key,
+                        tags: ['This Group does not in catalog'],
+                        isTemporary: true
+                    };
+                    setTimeout(() => selectRoom(tempRoom), 100);
+                }
+            }
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            updateSearchClearButton();
+            if (!currentSelectedRoom) {
+                renderRooms(e.target.value);
             }
         });
 
-        noResults.style.display = hasVisible ? 'none' : 'block';
-    }
+        window.addEventListener('hashchange', handleHashChange);
 
-    function selectRoom(room) {
-        currentSelectedRoom = room;
-        
-        // Update URL with anchor (preserve title and build parameters if exist)
-        let urlHash = `#${room.key}`;
-        const queryParams = parseUrlParameters();
-        
-        if (room.isTemporary && room.name !== 'Unknown Group') {
-            urlHash += `&title=${encodeURIComponent(room.name)}`;
-        } else if (queryParams && queryParams.title) {
-            urlHash += `&title=${encodeURIComponent(queryParams.title)}`;
-        }
-        
-        if (queryParams && queryParams.build) {
-            urlHash += `&build=${queryParams.build}`;
-        }
-        
-        window.location.hash = urlHash;
-        
-        // Hide list view and show detail view
-        container.style.display = 'none';
-        roomDetail.classList.add('visible');
-        
-        // Populate room detail
-        document.getElementById('detailRoomName').textContent = room.name;
-        document.getElementById('detailRoomDesc').textContent = room.description;
-        
-        // Populate tags
-        const tagsContainer = document.getElementById('detailRoomTags');
-        if (room.isTemporary) {
-            // For temporary rooms, show non-clickable tag with orange background
-            tagsContainer.innerHTML = `<span class="tag" style="cursor: default; color: #ff9800">This Group does not in catalog</span>`;
-        } else {
-            tagsContainer.innerHTML = room.tags.map(tag => `<span class="tag" onclick="event.stopPropagation(); searchByTag('${tag}')">${tag}</span>`).join('');
-        }
-        
-        // Generate join link with build parameter support
-        let joinLink = `pear://keet/${room.key}`;
-        
-        if (queryParams && queryParams.build) {
-            switch (queryParams.build) {
-                case 'int':
-                    joinLink = `pearint://keet/${room.key}`;
-                    break;
-                case 'exp':
-                    joinLink = `pearexp://keet/${room.key}`;
-                    break;
-                default:
-                    // Keep original pear:// for invalid build values
-                    break;
-            }
-        }
-        
-        document.getElementById('roomLink').textContent = joinLink;
-        document.getElementById('joinLink').href = joinLink;
-        
-        // Update button styling based on build parameter
-        const joinButton = document.getElementById('joinLink');
-        // Remove any existing build classes
-        joinButton.classList.remove('build-int', 'build-exp');
-        
-        if (queryParams && queryParams.build) {
-            switch (queryParams.build) {
-                case 'int':
-                    joinButton.classList.add('build-int');
-                    break;
-                case 'exp':
-                    joinButton.classList.add('build-exp');
-                    break;
-                default:
-                    // Keep default styling for invalid build values
-                    break;
-            }
-        }
-        
-        // Generate QR code using qrcode-generator
-        const qrcodeContainer = document.getElementById("qrcode");
-        
-        // Force clear all previous QR codes
-        qrcodeContainer.innerHTML = '';
-        while (qrcodeContainer.firstChild) {
-            qrcodeContainer.removeChild(qrcodeContainer.firstChild);
-        }
-        
-        // Generate QR code with error correction level 'H' (high)
-        const qr = qrcode(0, 'H');
-        qr.addData(joinLink);
-        qr.make();
-        
-        // Create SVG element for the QR code
-        const size = 200;
-        const cellSize = Math.floor(size / qr.getModuleCount());
-        const margin = Math.floor((size - qr.getModuleCount() * cellSize) / 2);
-        
-        let svgString = '<svg xmlns="http://www.w3.org/2000/svg" width="' + size + '" height="' + size + '" viewBox="0 0 ' + size + ' ' + size + '">';
-        svgString += '<rect width="100%" height="100%" fill="white"/>';
-        svgString += '<g transform="translate(' + margin + ',' + margin + ')">';
-        
-        for (let row = 0; row < qr.getModuleCount(); row++) {
-            for (let col = 0; col < qr.getModuleCount(); col++) {
-                if (qr.isDark(row, col)) {
-                    svgString += '<rect x="' + (col * cellSize) + '" y="' + (row * cellSize) + '" width="' + cellSize + '" height="' + cellSize + '" fill="black"/>';
-                }
-            }
-        }
-        
-        svgString += '</g></svg>';
-        
-        // Set the SVG as the innerHTML of the container
-        qrcodeContainer.innerHTML = svgString;
-        
-        // Store the QR data reference (for potential future use)
-        currentQRCode = qr;
-        
-        // Set download link based on OS
-        setDownloadLink();
-        
-        // Show back button and hide search
-        backBtn.classList.add('visible');
-        searchInput.style.display = 'none';
-        searchClearBtn.style.display = 'none';
-        document.querySelector('.subtitle').style.display = 'none';
-        document.getElementById('mainTitle').style.display = 'none';
-        noResults.style.display = 'none';
-    }
+        function setDownloadLink() {
+            const downloadBtn = document.getElementById('downloadLink');
+            if (!downloadBtn) return;
 
-    function searchByTag(tag) {
-        // Go back to list view if in detail view
-        if (currentSelectedRoom) {
-            backToList();
-        }
-        
-        // Set search input to the tag and trigger search
-        searchInput.value = tag;
-        updateSearchClearButton();
-        renderRooms(tag);
-    }
+            const ua = navigator.userAgent.toLowerCase();
 
-    function clearSearch() {
-        searchInput.value = '';
-        updateSearchClearButton();
-        renderRooms('');
-    }
+            // 1. Detect iOS (iPhone/iPod)
+            const isIOS = /iPad|iPhone|iPod/.test(ua)
+            // 2. Detect iPad acting as a Mac (iPadOS 13+)
+            const isMac = /Macintosh|Mac OS X/.test(ua);
+            const isIPadOS = isMac && navigator.maxTouchPoints > 1;
 
-    function updateSearchClearButton() {
-        if (searchInput.value.trim()) {
-            searchClearBtn.classList.add('visible');
-        } else {
-            searchClearBtn.classList.remove('visible');
-        }
-    }
+            // Default fallback
+            let href = 'https://keet.io/download';
+            let label = 'Download Keet';
 
-    function backToList() {
-        currentSelectedRoom = null;
-        
-        // Clear URL hash and query parameters
-        window.history.pushState("", document.title, window.location.pathname + window.location.search);
-        
-        // Show list view and hide detail view
-        container.style.display = 'grid';
-        roomDetail.classList.remove('visible');
-        
-        // Clear QR code
-        document.getElementById('qrcode').innerHTML = '';
-        currentQRCode = null;
-
-        // Hide back button and show search
-        backBtn.classList.remove('visible');
-        searchInput.style.display = 'block';
-        searchClearBtn.style.display = 'flex';
-        updateSearchClearButton();
-        document.querySelector('.subtitle').style.display = 'block';
-        document.getElementById('mainTitle').style.display = 'block';
-        
-        // Re-render to show search results if any
-        renderRooms(searchInput.value);
-    }
-
-    // Parse URL parameters
-    function parseUrlParameters() {
-        const params = {};
-        
-        // Parse hash parameters
-        const hash = window.location.hash.substring(1);
-        if (hash) {
-            // Split hash and query parameters
-            const [roomKey, ...queryParts] = hash.split('&');
-            params.key = roomKey;
-            
-            // Parse query parameters from hash
-            queryParts.forEach(part => {
-                const [key, value] = part.split('=');
-                if (key && value) {
-                    params[key] = decodeURIComponent(value);
-                }
-            });
-        }
-        
-        // Parse URL search parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('title')) {
-            params.title = urlParams.get('title');
-        }
-        
-        if (urlParams.has('build')) {
-            params.build = urlParams.get('build');
-        }
-        
-        // Return null if no parameters found
-        return Object.keys(params).length > 0 ? params : null;
-    }
-
-    // Handle URL hash on page load
-    function handleHashChange() {
-        const params = parseUrlParameters();
-        if (params && params.key) {
-            const room = rooms.find(r => r.key === params.key);
-            if (room) {
-                // Wait for initial render before selecting
-                setTimeout(() => selectRoom(room), 100);
+            if (isIOS || isIPadOS) {
+                href = 'https://apps.apple.com/us/app/keet-by-holepunch/id6443880549';
+                label = 'Download on App Store';
+            } else if (/android/.test(ua)) {
+                href = 'https://play.google.com/store/apps/details?id=io.keet.app';
+                label = 'Download on Google Play';
+            } else if (/windows|win64|win32/.test(ua)) {
+                href = 'https://static.keet.io/downloads/latest/Keet.msix';
+                label = 'Download for Windows';
+            } else if (isMac) {
+                href = 'https://static.keet.io/downloads/latest/Keet.dmg';
+                label = 'Download for MacOS';
             } else {
-                // Room not found in catalog, create a temporary room object
-                const tempRoom = {
-                    name: params.title || 'Unknown Group',
-                    description: 'This group is not in the catalog.',
-                    key: params.key,
-                    tags: ['This Group does not in catalog'],
-                    isTemporary: true
-                };
-                setTimeout(() => selectRoom(tempRoom), 100);
+                downloadBtn.href = 'https://static.keet.io/downloads/latest/Keet-x64.tar.gz';
+                downloadBtn.textContent = 'Get Keet for Linux';
             }
-        }
-    }
 
-    searchInput.addEventListener('input', (e) => {
-        updateSearchClearButton();
-        if (!currentSelectedRoom) {
-            renderRooms(e.target.value);
-        }
-    });
-
-    window.addEventListener('hashchange', handleHashChange);
-
-    function setDownloadLink() {
-        const downloadBtn = document.getElementById('downloadLink');
-        if (!downloadBtn) return;
-
-        const ua = navigator.userAgent.toLowerCase();
-
-        // 1. Detect iOS (iPhone/iPod)
-        const isIOS = /iPad|iPhone|iPod/.test(ua)
-        // 2. Detect iPad acting as a Mac (iPadOS 13+)
-        const isMac = /Macintosh|Mac OS X/.test(ua);
-        const isIPadOS = isMac && navigator.maxTouchPoints > 1;
-
-        // Default fallback
-        let href = 'https://keet.io/download';
-        let label = 'Download Keet';
-
-        if (isIOS || isIPadOS) {
-            href = 'https://apps.apple.com/us/app/keet-by-holepunch/id6443880549';
-            label = 'Download on App Store';
-        } else if (/android/.test(ua)) {
-            href = 'https://play.google.com/store/apps/details?id=io.keet.app';
-            label = 'Download on Google Play';
-        } else if (/windows|win64|win32/.test(ua)) {
-            href = 'https://static.keet.io/downloads/latest/Keet.msix';
-            label = 'Download for Windows';
-        } else if (isMac) {
-            href = 'https://static.keet.io/downloads/latest/Keet.dmg';
-            label = 'Download for MacOS';
-        } else {
-            downloadBtn.href = 'https://static.keet.io/downloads/latest/Keet-x64.tar.gz';
-            downloadBtn.textContent = 'Get Keet for Linux';
+            downloadBtn.href = href;
+            downloadBtn.textContent = label;
         }
 
-        downloadBtn.href = href;
-        downloadBtn.textContent = label;
-    }
+        // Initialize the app
+        async function initializeApp() {
+            await loadRooms();
+            renderRooms();
+            handleHashChange();
+            setDownloadLink(); // Initialize the link for the first time
+        }
 
-    // Initialize the app
-    async function initializeApp() {
-        await loadRooms();
-        renderRooms();
-        handleHashChange();
-        setDownloadLink(); // Initialize the link for the first time
-    }
-    
-    // Start the app
-    initializeApp();
-</script>
+        // Start the app
+        initializeApp();
+    </script>
 
 </body>
+
 </html>
