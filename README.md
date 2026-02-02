@@ -76,7 +76,10 @@ Want to host your own Keet groups directory?
 
 ### Adding New Groups
 
-Update the `room.json` file:
+To add a new group to this directory, you can:
+
+1. Join [Keety Links Chat](https://gasolin.idv.tw/keetlink/#yfo9nkga9abx983cannfe8e46mxmmqx711jwabjoh7ourqo7agdaah9s5yguzef4c9ax18wxwgfwsiqnfmq4rytkwr371eemycu75sscmzqduit8q5h34uda6cg8ntyfys5s4zf31m71xegqa1uoguttxkw1eye) and follow the instructions to post the non-expiry link there.
+2. Or, update the `room.json` file manually:
 
 ```json
 {
@@ -117,7 +120,7 @@ MIT
 This project helps make Keet more accessible to everyone. Feel free to contribute and improve the directory! By
 
 - 🐛 Report bugs or request features via GitHub issues
-- 💡 Suggest new groups to add to the catalog
+- 💡 Suggest new groups to add to the catalog via [Keety Links Chat](https://gasolin.idv.tw/keetlink/#yfo9nkga9abx983cannfe8e46mxmmqx711jwabjoh7ourqo7agdaah9s5yguzef4c9ax18wxwgfwsiqnfmq4rytkwr371eemycu75sscmzqduit8q5h34uda6cg8ntyfys5s4zf31m71xegqa1uoguttxkw1eye)
 - 🔧 Improve the UI/UX or add new features
 - 📝 Help improve documentation
 
