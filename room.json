@@ -554,5 +554,15 @@
       "Bitcoin",
       "Mining"
     ]
+  },
+  {
+    "name": "Good News Community",
+    "description": "A community for sharing positive news and encouraging stories.",
+    "key": "nfouhfk8oj5xd7jt8p3f3d6si16xgeuffnzy99m5zy1s7umpzntgsxcry59dhso9p1wohpmtowmzifbtsg74tox4utufg9c64drj47ohhfcsknap5quu9f8cej4awn3rxbzr77rfkp73ncyeh7c64incbopneyedmbtogi1jakus8urtj8bd7wsgqxoqs",
+    "tags": [
+      "News",
+      "Community",
+      "Social"
+    ]
   }
 ]
