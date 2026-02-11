@@ -971,9 +971,9 @@
             const ua = navigator.userAgent.toLowerCase();
 
             // 1. Detect iOS (iPhone/iPod)
-            const isIOS = /iPad|iPhone|iPod/.test(ua)
+            const isIOS = /ipad|iphone|ipod/.test(ua)
             // 2. Detect iPad acting as a Mac (iPadOS 13+)
-            const isMac = /Macintosh|Mac OS X/.test(ua);
+            const isMac = /macintosh|mac os x/.test(ua);
             const isIPadOS = isMac && navigator.maxTouchPoints > 1;
 
             // Default fallback
@@ -981,7 +981,7 @@
             let label = 'Download Keet';
 
             if (isIOS || isIPadOS) {
-                href = 'https://apps.apple.com/us/app/keet-by-holepunch/id6443880549';
+                href = 'https://apps.apple.com/app/id6443880549';
                 label = 'Download on App Store';
             } else if (/android/.test(ua)) {
                 href = 'https://play.google.com/store/apps/details?id=io.keet.app';
