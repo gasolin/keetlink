@@ -177,10 +177,11 @@
   },
   {
     "name": "Pear Releases 🚀",
-    "description": "Official channel for Pear release notes and version announcements.",
-    "key": "yfot9fi7s5feuz9jc6cxgacycdnrz6besatc5fgrehb9nmxey74mhfh957e5513iuaj4aiyiqbo9ystdxegebcfp4kc6tax7ei1m19shcgzco8a8h8x5hcxtmio6ycyk5kf4zqu4fy1pyus8mj6mqfstj5aryye",
+    "description": "A space to get the latest updates and all things about the Pear runtime.",
+    "key": "nfohjh8doay54bzgtrekddbk8wjx7tb5cpi9kukesrpuztgn13z9yekihpj9xtzqdomoe3wc3wnsdhn84migxe9dwg6rod6z5ben9dryz698gh4f76xicpfw56yugzpt7wt8xyk6z6y68qrgrrhw5egyo94iwyed1bg8cnkt4etjwjskzpij5pnrw3fhr",
     "tags": [
       "Releases",
+      "Pear",
       "Official"
     ]
   },
@@ -466,7 +467,7 @@
   {
     "name": "Keet Добро Пожаловать 🌍",
     "description": "Общественная комната для всего, что связано с Keet & Pears. Пожалуйста, соблюдайте правила сообщества.",
-    "key": "yfo19kgumsfx6yebdqhfgn5na9qiw1pcxny1dmzwj1s1tsazsyr9rto4y738pcsobakt47scnkz8sfuua4xx6phqbfnpyf5xyn61y4g1zh3httbaihejfq3gzrq3jhyjctf9fyeu7ufyf1k4krawi5b1ay7unye",
+    "key": "nfo19kgumsfx6yebdqhfgn5na9qiw1pcxny1dmzwj1s1tsazsyr9rt1e4arujn3kwe9gc7bgm8pbeiag13c4dmapqi6zzpwaednz9o9odjcoxsupzsopqc46ceyjfses3cw1oghudtgi6x1ifdhj1yc4woosgyed346wfg1paetn1iiuafiethafntfhr",
     "tags": [
       "Official",
       "Russian",
@@ -485,9 +486,10 @@
   {
     "name": "Keet Bienvenido 🌍",
     "description": "Sala comunitaria para todo lo relacionado con Keet y Pears. Por favor, sigue las reglas de uso en la sala de la comunidad. ¡Disfruta!",
-    "key": "yfozhdeghdhkmq6pjnot38qehk41tfdk7ezdrzop6eg1kf8j4315eyo6s19b4u56id8d9x98bj86he5anigx9r9di4mnqes6nbgf61z6xg6zm53e97pykx5ke3ir3xb4aojbq8xgw597nstet4ykcki5zxfusye",
+    "key": "nfozhdeghdhkmq6pjnot38qehk41tfdk7ezdrzop6eg1kf8j4315eyskw9jb9xaucsh8wekg9m5z3fxcooxf9fggkd9t6d3s4nbpzwnxmaa4jg7ow54kenfw4njk8hqa1jobcfkziiu37egtkq7ge6hdw6bfryedn7xcc9njakfrjraefdt1fgtg3jgcr",
     "tags": [
       "Official",
+      "Community",
       "Latin",
       "Spanish",
       "Español"
@@ -496,18 +498,20 @@
   {
     "name": "Keet Benvenuto 🌍",
     "description": "Sala comune per tutto ciò che riguarda Keet e 'Pears'. Si prega di seguire le regole della comunità.",
-    "key": "yfoty8ery1i6q7urd4grpb8jbwu9zs7xitorcg4yypnd3cfzwp16g7e4fyf7mhyaokkcpaycat1tgukdam6m9tq8g64nnjfudji98sg96g5ewnucm93iji4w7x1f1xgnxzte8auwrsoei4ypa7cnwzepxzxq4ye",
+    "key": "nfoty8ery1i6q7urd4grpb8jbwu9zs7xitorcg4yypnd3cfzwp16g7cmink6dmr6jqjaodufpojo6x7j45g15sghb1mm1zstk8frdhf97etai3cpujbgmcf7x4mk4jtjun53pohwpspkq6rb6sdgngddahd9kyedwfoz16nkakuich9pjubfj77x6jfcr",
     "tags": [
       "Official",
+      "Community",
       "Italian"
     ]
   },
   {
     "name": "Keet 欢迎/ 歡迎 🌍",
     "description": "Keet 中文社群/社區.",
-    "key": "yfo4epyx159hi9s4abcyqmqf6cx5q5nhiemdr58swhyr1o3pfh8irmq5eyhthz864x44kdub84hb8op8p9abiza4jruiyg9chp4scemtxf6jumeqhyn3dyxhjjkfsune779nh1an6dbx33156j689qcc74zn1ye",
+    "key": "nfo4epyx159hi9s4abcyqmqf6cx5q5nhiemdr58swhyr1o3pfh8irmetf4kczst45dg9mn5gj4546cntiqdkmn65psbyeitnkorstex3kdg1dadm18ceihpk7q7hd6wyny9oghx4aahnjjcg661yuyom7yzzayedrj5nfb6opjcggy4sj8bewtrubywqg",
     "tags": [
       "Official",
+      "Community",
       "Chinese",
       "中文"
     ]
@@ -541,7 +545,7 @@
   },
   {
     "name": "Pear Pass 🔑",
-    "description": "Gaming news, releases and community chat.",
+    "description": "Pear Pass releases and community chat.",
     "key": "nfo48ei19gg1gw8ih3cu8rpw6wc9nstxb56jogzh9asa3nkchdqthjcxdcrtjgettbfnpzxirona5uketw37wjubpsc86qae3y4sayae9ufmh5ooz85rhn6j5ocjmgejw6sh85bsxxut57tafoxrpj8td4txayedtjnjgnnjaetn1iiuafinrkkssq4hg",
     "tags": [
       "password",
