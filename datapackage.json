@@ -1,0 +1,916 @@
+{
+  "name": "keet-public-rooms",
+  "title": "Keet Public Rooms",
+  "version": "1.0.0",
+  "licenses": [
+    {
+      "name": "CC0-1.0",
+      "path": "https://creativecommons.org/publicdomain/zero/1.0/"
+    }
+  ],
+  "keywords": [
+    "keet",
+    "rooms",
+    "public"
+  ],
+  "x-type": "keet/room-pack",
+  "resources": [
+    {
+      "name": "qvac-workbench-dev",
+      "title": "QVAC Workbench Dev 🛠️",
+      "description": "A developer‑focused room for building and testing QVAC workbenches.",
+      "data": [
+        {
+          "key": "nfotu398boebrse8udixr6sbzwnozbq99diquyq8n3h4uw6a8br41yya7ri333xtp61fucazyjmgaomjwqdjwhn3yi1iwb9bcfudeqfyq6j4wpmuyqayd4bqcsrg1h8n6n88qae9d97ck81j9nd39p6ksmbuayedtjnjgnnjajc3g5sej8bfoaadk3sqk"
+        }
+      ],
+      "keywords": [
+        "Dev",
+        "QVAC"
+      ]
+    },
+    {
+      "name": "pear-school",
+      "title": "Pear School 🎓",
+      "description": "A classroom‑style room where newcomers can learn how to code using the Pear runtime.",
+      "data": [
+        {
+          "key": "nfoutkd94qh71afja5myy58r5xw1wof3ip38em8xkdn6ckw9fnchcgjaokjjprnnfj4w3yy4oz4u96nx3q3k3aniddtb3tfjc8po5o8eq1a6neumzrs3troe4xdcwmbf936zdy1w13ispxq6agi4jre1f7jqayedtjnjgnnjaet8cew8zpiewtrubyg4q"
+        }
+      ],
+      "keywords": [
+        "Education",
+        "Coding"
+      ]
+    },
+    {
+      "name": "tether-data-announcements",
+      "title": "Tether Data Announcements 📢",
+      "description": "Official announcements about the QVAC Workbench Development Kit and related updates.",
+      "data": [
+        {
+          "key": "fo1qk35cfui6d1ac3yn94hs1yxawpoypmmkuqhteh939p5kcwh5hm3ttxe888uukkbiw18tn57hmhjxez6te5zhewqnhw81njd4ebhreyu155oirjxndcqbikjofmzwkhtojg3f6dfesg6kenpukjmxuuyooyedmbtogi1jakosn43ujmbbqsy17prhr"
+        }
+      ],
+      "keywords": [
+        "News",
+        "Official"
+      ]
+    },
+    {
+      "name": "great-music-finds",
+      "title": "Great Music Finds! 🎶",
+      "description": "Share the music you’re currently enjoying and discover new tracks from fellow members.",
+      "data": [
+        {
+          "key": "yfo4dyhdoi1zqyitsffueh3siw46p3coj9omwnxmqyudw4zjn96geseo6n6n84cuau3ziaj4w9y1cztjpfk6399sga6j61zms3re8hj1abminfa4qz911tgp1ujiryuq36oq5hg5zzm8yf7d36dr614mxzse4ye"
+        }
+      ],
+      "keywords": [
+        "Music",
+        "Social"
+      ]
+    },
+    {
+      "name": "the-dank-bank",
+      "title": "The Dank Bank 😂",
+      "description": "A light‑hearted room for sharing memes and funny content.",
+      "data": [
+        {
+          "key": "yfo6zyepep95cg6dkgi6691b4zt54pjmeq55gwcg48aambyrg58kqu3z66xesdk15fn9ucioyrkztzfky6koj1xeo11yu3cjph1amcuc6upggi49ng54n9r5fo9ho7ahm7qc5ewembh13fyjrynpoeo3psqoye"
+        }
+      ],
+      "keywords": [
+        "Memes",
+        "Fun"
+      ]
+    },
+    {
+      "name": "politics-and-freespeech",
+      "title": "Politics and Freespeech 🗳️",
+      "description": "Open discussion of politics, current events and free speech topics.",
+      "data": [
+        {
+          "key": "yfoaf3cpoiac7nt89njcdcfrizcj33sscnj6co41b4bc6adnsgy8ktrifk8f8iia5n67hjadm3utyfjaqazpkwyqzjd8779uzoi9htaxwjnao3zkr948iwh9fp13gahj3utqirxt31xq44da1qkcmkcd3goy6ye"
+        }
+      ],
+      "keywords": [
+        "Politics",
+        "Discussion"
+      ]
+    },
+    {
+      "name": "space-discussion",
+      "title": "Space Discussion 🚀",
+      "description": "Talk about rockets, satellites, astronomy and everything related to the final frontier.",
+      "data": [
+        {
+          "key": "yfozkmkjip9i1zcxhzb41gtr9xtzdte8crnyoperdqm668ann3afnfjrgy79jd4x5xyj3yjyc7uwbj48ns7jepowkj3za4tmfdwdj3dprt9jnrexqr9b8wcoxqh7qheu7eyzxx4dsi1i8k3ju56oqftunpynye"
+        }
+      ],
+      "keywords": [
+        "Space",
+        "Science"
+      ]
+    },
+    {
+      "name": "cuisine-and-recipes",
+      "title": "Cuisine and Recipes 🍽️",
+      "description": "Share recipes, cooking tips and food photos with fellow chefs.",
+      "data": [
+        {
+          "key": "yfo641ydddkfsff4umig865in99j81bffqqy58powogaiye3fyo41w45uwy4z7o3cgnmuezbsejwmfmhxyewo7r3yb5minz74hzg35tszcfjypsjera4cmnwcma7idj65r4d7phbymgwombrxao7y6duf8zz1ye"
+        }
+      ],
+      "keywords": [
+        "Food",
+        "Cooking"
+      ]
+    },
+    {
+      "name": "healthy-foods",
+      "title": "Healthy Foods 🥦",
+      "description": "A place to exchange nutritious recipes and discuss wellness‑focused eating.",
+      "data": [
+        {
+          "key": "yfouxrtqsuz9m58ubmjm9k316zjmckj96hh5ydchyqykfm9xk1g9wpk7xxu1qu5augbgsqwm663qf47e97ok8cfzce1po8szy68435w6r9y8rnrdctpbs7cpgy5d5fq6w6bty4q971o4i9t39cf5imj6buaw1ye"
+        }
+      ],
+      "keywords": [
+        "Health",
+        "Food"
+      ]
+    },
+    {
+      "name": "fitness-discussion",
+      "title": "Fitness Discussion 💪",
+      "description": "Talk workouts, share progress, ask for advice on strength‑training or cardio.",
+      "data": [
+        {
+          "key": "yfow7intjq5a3g6y9r6nb5mcen6b4o4z8uyimgsou3i9rg77rxstk78sjxxi5oaxyymckksmr1nuj61nr4ixkyegbz6mxq4qcd3oc1ym6fqprpd9iuo9a6j4spfak7i5hdnxd851ufkssqqdyfy7q7oda3raoye"
+        }
+      ],
+      "keywords": [
+        "Fitness",
+        "Health"
+      ]
+    },
+    {
+      "name": "nature",
+      "title": "Nature 🌲",
+      "description": "Post photos, stories and tips about hiking, camping and wildlife.",
+      "data": [
+        {
+          "key": "yfo4i8bterjg7pox45r8nryi5o5n3zxhnmma4inmjgaqn71adf6wr5agpkcedee93ykyi3ybsq4diy6oh6ztz9adxnsqefrj4i798jwqm6no7jjkp6u3ndxic5qu6ytzwjmdotkgpq19zpoj19p7cabz8is6qye"
+        }
+      ],
+      "keywords": [
+        "Nature",
+        "Photography"
+      ]
+    },
+    {
+      "name": "right-memes",
+      "title": "Right Memes 🏛️",
+      "description": "A meme room with a conservative perspective.",
+      "data": [
+        {
+          "key": "yfoiypmniwoz7gfg3e4x1doftxgdca4cjwx4wb9e3x1jexib8f6z61ukniqyxa8tust8cojmq3u89y9uqerp8dn51zqsy3kxsfog71t57sh8f67ksjkm1k6i98is3wy3nj33169cdf7kdkow81zoygx169pigye"
+        }
+      ],
+      "keywords": [
+        "Memes",
+        "Politics"
+      ]
+    },
+    {
+      "name": "keet-welcome",
+      "title": "Keet Welcome 🤝",
+      "description": "General discussion about the Keet, Pear ecosystem and related topics.",
+      "data": [
+        {
+          "key": "yfo65n76jzi9girwkdqffaa6istu4n9zrc8pje6qds1qqco448fk6cnoa5uuynb7tnje58r7mtpzs1bodbk8routkfmk3fhd4czh6y8x5jsj7t69pq3iatqd8jj38bjxy318atyxy7mnwg1zk4djry47cchdaye"
+        }
+      ],
+      "keywords": [
+        "General",
+        "Official",
+        "Community"
+      ]
+    },
+    {
+      "name": "bug-bandits",
+      "title": "Bug Bandits 🐞",
+      "description": "Report Keet bugs, suggest fixes and collaborate on improving the platform.",
+      "data": [
+        {
+          "key": "yfoios17dgbdhoyizg1er4zdsay9admk4oo3meh4j1tawqx4fw5scmysf93per7subcttbhrjuoiriey7b65sh5yrdmhpape7j7f4d7s51kfur9wwwrkwb8ms31n9ro1h467iqq4orw945do88oxztmpfoznnye"
+        }
+      ],
+      "keywords": [
+        "Bugs",
+        "Official"
+      ]
+    },
+    {
+      "name": "keet-news",
+      "title": "Keet News 📰",
+      "description": "Official news channel for updates, releases and feature announcements.",
+      "data": [
+        {
+          "key": "yfo7j69nb4d8sqtbex7p87e5ukiq9mzyuj3rrpxbwmtrx3ba5x3ga7bdr98c1ycomg1kuo3p9zgscrqahbyo7xsgkr4x5k9rerbpjmjxp3h555imc1ug1qyinw9utwf7n5csxq91n9wuf5p5orxmpsk97youaye"
+        }
+      ],
+      "keywords": [
+        "News",
+        "Official"
+      ]
+    },
+    {
+      "name": "keet-ux-lab",
+      "title": "Keet UX lab 🎨",
+      "description": "For all Keet users to share ideas, feedback, and test prototypes.",
+      "data": [
+        {
+          "key": "yfoadnyshwtqr9hubr97wnxi876wnfbe1e7zkjaq5dj5r3f9hbxwyg47ok3o769popks4ri3yw7zsu1ad5ghexqqagnu3xmgo9iym6micmzah7dk4cd8z61rez3wfn8azkujsjfhzfpm7jum8r6533sa1ywyqye"
+        }
+      ],
+      "keywords": [
+        "Official",
+        "UX",
+        "Design"
+      ]
+    },
+    {
+      "name": "keet-apk",
+      "title": "Keet APK 📱",
+      "description": "Download the latest Keet Android APK directly from this room.",
+      "data": [
+        {
+          "key": "yfo6nemwt5oik3k3hnadrzbdz4txwdghpdt3zrhrd1wycynkn88keu6anj77ohjd8w3hfdmsbw8pe5mazk5by7tq89s6fz5ihyj47wzic9z55utdbp5ae7d6aj4qmsqph1zdza99gqjr945eamjsrxxfkmuzkye"
+        }
+      ],
+      "keywords": [
+        "APK",
+        "Download",
+        "Official"
+      ]
+    },
+    {
+      "name": "pear-development",
+      "title": "Pear Development 👩‍💻",
+      "description": "Talk about building Pear apps, share libraries and get help with the runtime.",
+      "data": [
+        {
+          "key": "yfo6dbyb4iz9bhhdq6nzq888dto4b4mxttz94i8ttaidrppwnmtehgn4so6u5jy9cfg41x7aoht5egf8354wjaz7eip5am37ie9ffy3gpq4bngkz35fx4f9zxpeo53qt679q4e8bjazbxoo356pz96c9munhaye"
+        }
+      ],
+      "keywords": [
+        "Dev",
+        "Pear",
+        "Official"
+      ]
+    },
+    {
+      "name": "bare-development",
+      "title": "Bare Development 🔧",
+      "description": "Official discussion for Bare (Holepunch) developers.",
+      "data": [
+        {
+          "key": "yfohfp78bhckouj59uybdzneeisuuq47jz75rkk36nu86sen4uhh4dafqhjktx6a86zmjafm6q1s1x3hd3ukhbp9yrqprmapwsh87e9ue1zbzc5gahwh6hdjfwegyfdxhr8kq633z96j41em1fgsctwudj5xaye"
+        }
+      ],
+      "keywords": [
+        "Dev",
+        "Bare",
+        "Official"
+      ]
+    },
+    {
+      "name": "pear-releases",
+      "title": "Pear Releases 🚀",
+      "description": "A space to get the latest updates and all things about the Pear runtime.",
+      "data": [
+        {
+          "key": "nfohjh8doay54bzgtrekddbk8wjx7tb5cpi9kukesrpuztgn13z9yekihpj9xtzqdomoe3wc3wnsdhn84migxe9dwg6rod6z5ben9dryz698gh4f76xicpfw56yugzpt7wt8xyk6z6y68qrgrrhw5egyo94iwyed1bg8cnkt4etjwjskzpij5pnrw3fhr"
+        }
+      ],
+      "keywords": [
+        "Releases",
+        "Pear",
+        "Official"
+      ]
+    },
+    {
+      "name": "pear-baby-room",
+      "title": "Pear Baby Room 👶",
+      "description": "A friendly space for beginners learning how to build Pear apps.",
+      "data": [
+        {
+          "key": "yfo9g36qbzu1kf8cfczywhz1pm1ocgt54i98z748fj865i66zhpw4ay7fyxmbythqgm4btgybui5t84te8duzqe5bory5yauun4c46ugap95nqt156e6d441md3may33um58qxrczweeab8x1p8a3yk37cfswye"
+        }
+      ],
+      "keywords": [
+        "Beginner",
+        "Dev"
+      ]
+    },
+    {
+      "name": "bitcoin",
+      "title": "@bitcoin 🔥",
+      "description": "A lively space for Bitcoin enthusiasts to share updates, news and discussion.",
+      "data": [
+        {
+          "key": "yfo951jprdyzmfaj9hcxtahif3j3xp31phk1scr3cbo778kr7ghpcxkinyft5cs9m74rt9dcxf71sfxidkxoa7nh6gqr334ik5itkeg3rxyc84b9p7xud81wa375i79epjm8pz63kzkcjiq8f68yumg1syferye"
+        }
+      ],
+      "keywords": [
+        "Crypto",
+        "Community"
+      ]
+    },
+    {
+      "name": "plan-b-forum-bitcoin-event",
+      "title": "Plan B forum – Bitcoin event ⏳",
+      "description": "Discussion and organization around the Plan B Bitcoin scaling proposal.",
+      "data": [
+        {
+          "key": "yfo9z4ahxq6n46yj5eauaaktzx7e1mgpak4y415yxkdq58y68m5ignd58jth54okkd6pemr3ridptm6ojfhswyxx8ka68is67j5swazcedia9z83575ybttpn51kcnxatg418g1eabsjsxt18prnesr5k9rb1ye"
+        }
+      ],
+      "keywords": [
+        "Bitcoin",
+        "Event"
+      ]
+    },
+    {
+      "name": "bitcoin-economy-adverts",
+      "title": "Bitcoin Economy Adverts 🛒",
+      "description": "A marketplace for services and products that accept Bitcoin.",
+      "data": [
+        {
+          "key": "yfo4csu4f8m1hzrr3tqxbjdx757u1x3duoiwiibj8cow86mqcq5gauga1u1y1mw5qf3ihuhndzqphtaouixjq4nzknjgyyui5p7np51x9x5m5frrc9johkitsik4eh5u8rd8bydueznb8zjxaukz5r44ey49yye"
+        }
+      ],
+      "keywords": [
+        "Ads",
+        "Bitcoin"
+      ]
+    },
+    {
+      "name": "bitcorner-news-in-salvador",
+      "title": "Bitcorner News in Salvador 🌎",
+      "description": "Regional Bitcoin news and community updates from El Salvador.",
+      "data": [
+        {
+          "key": "yfoa3ips8kafip6ck93qpdjpb3hcz8xj3ukzo4wurx1nt9hmy5gssiouehnzgnjicdc815nhnrbbe6och3ffe14t13ngnq4hpxdgupge8k74z4fzdke4tscmz5ysgtpyeoopa87d9h5bkhnjhsnzmkwq8hz6aye"
+        }
+      ],
+      "keywords": [
+        "News",
+        "ElSalvador"
+      ]
+    },
+    {
+      "name": "cars-and-engine-porn",
+      "title": "Cars and Engine Porn 🏎️",
+      "description": "Discussion of cars, engines, performance mods and automotive photography.",
+      "data": [
+        {
+          "key": "yfo4ue8uwgshfjk6zbwcxmtqa75buub5jj7qap18oghhuxcbbtjuy9qfrnqx993opobkpmbf33983ybx81rwy85tcw1opp7a7i7bzaepfxej1iyx66d69b6wc7gsi7gfyc5xeikxag7mwkot5fsczuw6xccghye"
+        }
+      ],
+      "keywords": [
+        "Cars",
+        "Automotive"
+      ]
+    },
+    {
+      "name": "carnivore-and-low-carb",
+      "title": "Carnivore and Low Carb 🥓",
+      "description": "A community for sharing carnivore‑style recipes, tips and low‑carb lifestyle discussion.",
+      "data": [
+        {
+          "key": "yfot9rooh6e4fhthwbrxwhpcoh5bjxabfkhkt14qqu47xnhqe8tisxeum9qotj4qxrnea4er71xottagi49rjsg5e8fmn91r56iyan9f3ge7ijroycrs3axxmgf3p6i5fcnw151yf8xne8z3jodz45nomnn1rye"
+        }
+      ],
+      "keywords": [
+        "Food",
+        "LowCarb"
+      ]
+    },
+    {
+      "name": "visual-thinking",
+      "title": "Visual Thinking 💡",
+      "description": "Discussion of visual thinking techniques, mind‑maps and creative problem solving.",
+      "data": [
+        {
+          "key": "yfooxpsikqi4rqunrr7ebfk3n1yi9a5gmdinyeoam7fm6ciauyf56y7oar568i597r66fymkho93czeoqs1tf4kt3knpxo6gfzg1bocu8mzyzux5e6fxhbokw9u7h3qzpgjfuypj4e5pabfeiai58g5tmws5aye"
+        }
+      ],
+      "keywords": [
+        "Creativity",
+        "Thinking"
+      ]
+    },
+    {
+      "name": "hyper-socks-and-hyperident-discussion",
+      "title": "Hyper socks and HyperIdent discussion 🔐",
+      "description": "Talk about the Hyper‑sock protocol, HyperIdent and related privacy tools.",
+      "data": [
+        {
+          "key": "yfosq4o16dnijf49bwtrjwh6msaa4hxdgosqpcbdjnnp61rmy9pmqsj1pscmamgia3tqkfwt8ow9u84wro67ufcs68h8efgtegt4rx6zn1j54d5ugm9t7qjnughwp7yzkkrkymrierq3buzkrmg76ex9pmfw4ye"
+        }
+      ],
+      "keywords": [
+        "Privacy",
+        "Protocol"
+      ]
+    },
+    {
+      "name": "wherefam-p2p-location-sharing-app",
+      "title": "WhereFam – P2P location sharing app 📍",
+      "description": "A room for discussing the WhereFam peer‑to‑peer location sharing application.",
+      "data": [
+        {
+          "key": "yfou1k336h5ieixwah4qjxsbx1x889fnefmfkr3o6e5amwfqqjy343qk8ze35f8mbtu4podrmpqm3tqfnc1a3xphpe5btjsinxurjsq17omodj3jne9ho3xmh5g6gqkhtu1gq5uhk1mt9x88a9q1jgfhbumanye"
+        }
+      ],
+      "keywords": [
+        "Location",
+        "P2P"
+      ]
+    },
+    {
+      "name": "rd-btc-meme-dealings",
+      "title": "RD_btc Meme Dealings 🤣",
+      "description": "A meme‑centric room for Bitcoin community jokes and image sharing.",
+      "data": [
+        {
+          "key": "yfo1ekk4fccccecdc5ed1br6eqgd45yc3ow6zgs85ketqhc4msdaor8ut3z74a831n3h16amsa6c51c8e8tsfgaf6sadxf8e6eij54nw1ke4on3odixfk88bkmccs69nf3a3i7gncip3dibp9nhwaq55zj43oye"
+        }
+      ],
+      "keywords": [
+        "Memes",
+        "Bitcoin"
+      ]
+    },
+    {
+      "name": "lain-of-the-wired",
+      "title": "Lain of the Wired 🛡️",
+      "description": "Curated list of cybersecurity tutorials, utilities and reference material.",
+      "data": [
+        {
+          "key": "yfosw4knqb7pepqjzacoxjaffd1tyqq9yqiyksqzscfb3t1y5m1s19knexk39mkh3umu15enf3q43uwstji8b9hzaryxeqwddstm7y6546spiuo8y91kynfdkhm4pntnpez5njhsjd1t7aicxtc7kibukkxtoye"
+        }
+      ],
+      "keywords": [
+        "Cybersecurity",
+        "Resources"
+      ]
+    },
+    {
+      "name": "unconquered-sun",
+      "title": "Unconquered Sun 🎨",
+      "description": "Gallery‑style room for sharing historical artwork related to European culture.",
+      "data": [
+        {
+          "key": "yfo9zxu9uip39nephxioau5988c3gud7ggbgi5xm6zi1z1ghdye9ct66s1dtdmje8qwbt4nkh87cickj69xwrdidz5jtbwopm8y98wj14h4ctbq8pb5q5wbdsiccbqfr61wrrye3uj8f84sx4fo6ooyxe6zh4ye"
+        }
+      ],
+      "keywords": [
+        "Art",
+        "History"
+      ]
+    },
+    {
+      "name": "history-room",
+      "title": "History Room 📜",
+      "description": "Deep‑dive conversations about historical events and eras.",
+      "data": [
+        {
+          "key": "yfohg1zwq6r9frigjo4xhcq3jtipypkqmgjkjrznw7h7ycqqw6eiqnq6xdx8aknitk5e8zp53ffpygezumt7ydrzwi8crj1tt7zqnibn7rjnx6uxzhzrjxkgch35z863rufcmrokq5rtumeey6oqgmyji7froye"
+        }
+      ],
+      "keywords": [
+        "History",
+        "Discussion"
+      ]
+    },
+    {
+      "name": "the-book-club",
+      "title": "The Book Club 📚",
+      "description": "Monthly reading groups, recommendations and literary discussion.",
+      "data": [
+        {
+          "key": "yfow4qs9u91garuw7zcpyudx1rn6qc3uw1i8g478qyf17rwf9u87nazwxhqwadcwpwhsk5oz9g3tzt86s86ygrq9xdibsh3xokzxhq19k5rooojtszpaiarhzws545k1tp1p3i8e3hby5yup85gok6ag1zihcye"
+        }
+      ],
+      "keywords": [
+        "Books",
+        "Club"
+      ]
+    },
+    {
+      "name": "link-it-up-share-interesting-link",
+      "title": "Link it up – share interesting link 🔗",
+      "description": "Share and discuss links, articles, videos or any other web content.",
+      "data": [
+        {
+          "key": "yfo5wgquu6eayojj4j51hwsdcgodtu118z7xhujq96x6e1m84ckphnjeoba4bafrrkhqic59ryu3orgrxj6ozb8xxxch4ffefsad9d6y9bp7hotmzp11fn169stdzbfdad98dm7ripgkjt79uf4t8w7kpgsn1ye"
+        }
+      ],
+      "keywords": [
+        "Links",
+        "Sharing"
+      ]
+    },
+    {
+      "name": "the-keet-bay-sharing-hyperdrives",
+      "title": "The Keet Bay – sharing hyperdrives 💾",
+      "description": "A place to exchange and discuss Hyperdrive files and related content.",
+      "data": [
+        {
+          "key": "yfourwqkmqw1bburxr7eqrxxkwatu7qqp77fh78hnidqfptxi9f8a1tgddz8h9hiorn1udntyx3376wem7uei8njarc1k9udig8ngsr58ebz8pb5gghapjq4jr5hu7xbam9qbmrpnq1gphxibp8qfuakxxy9wye"
+        }
+      ],
+      "keywords": [
+        "Files",
+        "Hyperdrive"
+      ]
+    },
+    {
+      "name": "pipodultrarealitypod",
+      "title": "PiPodUltraRealityPod.. 🥽",
+      "description": "A room for discussing the PiPod Ultra Reality hardware project.",
+      "data": [
+        {
+          "key": "yfoinxf6856axxoqhkniudjf8aypw9wmcns3fakzhzfedecnh68711kn1rcdxkwjt7rf59zsfsuwicm9npxyg1g5fcg96kgitk1mzr75i5igxx7hn9gswzbbccqkyaskk8nakfizkcmgyd4khianwf1pcb5zsy"
+        }
+      ],
+      "keywords": [
+        "Hardware",
+        "VR"
+      ]
+    },
+    {
+      "name": "latterday-saints-mormon-religious-group",
+      "title": "Latter‑Day Saints – Mormon religious group ✝️",
+      "description": "Community for members and friends of the Church of Jesus Christ of Latter‑day Saints.",
+      "data": [
+        {
+          "key": "yfohmdtxujxpowbn7c4jyqru59qi3s18fsieiuxz3ey1rdxroxgzqzhf3o5bnix3uawu7h6xrj3oh6qi66i5oyp53akuhopomt6hhfosaqwqurzzb5w7wpsg5d4ywrn5kk53jtqkiejgye9su9qp18kzw1ebw"
+        }
+      ],
+      "keywords": [
+        "Religion",
+        "Mormon"
+      ]
+    },
+    {
+      "name": "trove-news-gaming-discussion",
+      "title": "Trove News – Gaming discussion 🎮",
+      "description": "Gaming news, releases and community chat.",
+      "data": [
+        {
+          "key": "yfo54gfb3nb3xpxqnzmtdhas653j56xtxbeopocdgqpz9c5nrg7qyw7ugf1d3n6mhmzp6gmtj8wouratu36kuh9za9azgdojq91taksnmm9npjtjbrupexg8ii5ea5ki6zre11ppes5rouykgm7hik3kzpxqsye"
+        }
+      ],
+      "keywords": [
+        "Gaming",
+        "News"
+      ]
+    },
+    {
+      "name": "datecosystem",
+      "title": "dat‑ecosystem 🌐",
+      "description": "Discussion of the original dat‑ecosystem libraries and their evolution.",
+      "data": [
+        {
+          "key": "yfow7upxbm84wuddgo16gmcbm8t4k9zcdo6kwigfop384ueerjdag346kr48i97w9u81rqzcpzry4nrtnghhgr5wucoxn5gr73xhtg5f93kh57tp7o3mxoudjgopsfyaqqnonbbjnf63cx7axn8sifhctt95oye"
+        }
+      ],
+      "keywords": [
+        "Dat",
+        "Tech"
+      ]
+    },
+    {
+      "name": "west-nc-hurricane-recovery-fund",
+      "title": "West NC Hurricane Recovery Fund ❤️‍🩹",
+      "description": "Fundraising and coordination for hurricane relief in western North Carolina.",
+      "data": [
+        {
+          "key": "yfouh4egmproii91t4ghnym6b7q9q1zeefbfzw6i3os6om4qztapwfa1wzudxh48pyqm97wq7ymfuctshdi9k1me61kkem5estn8bei7fspcatd8hc7odqyq4k3c59t4ri6u4uurbarss9sq8ho1gdd6ibur"
+        }
+      ],
+      "keywords": [
+        "Charity",
+        "Relief"
+      ]
+    },
+    {
+      "name": "keet-web-a-demo",
+      "title": "Keet Web – a demo 🖥️",
+      "description": "Demo room showcasing the Keet web client capabilities.",
+      "data": [
+        {
+          "key": "yfo4b8i6mxe75y9aibf1qq74q33jh75ta916trss5kzfu58a9k5fe1ayig861pc3pachyazs3rjuikkazfpx1z19d6ffe11pz4y8zsi1xcm194acb3qxqjoz8gui8qbae79ifw9zkk6zwsxeez5w1t86ba3b"
+        }
+      ],
+      "keywords": [
+        "Demo",
+        "Web"
+      ]
+    },
+    {
+      "name": "diydiywhyyyy-discuss-diy-projects",
+      "title": "diydiywhyyyy – discuss DIY projects 🔨",
+      "description": "A maker‑focused room for sharing DIY builds, tips and troubleshooting.",
+      "data": [
+        {
+          "key": "yfo5jzyzx38co58y3a4bbtrcemrjixh6oort41pm6m8nu6rwfotaqtgpj3zg5addbjtrf8umpa8urqgw4m67jne6h1upxtm98sosrhi51juarhgbu9ecbagw3cn3d6babtwb9nj8wtt1q945rn8bwg8w4hhtsye"
+        }
+      ],
+      "keywords": [
+        "DIY",
+        "Maker"
+      ]
+    },
+    {
+      "name": "michael-saylor-fans",
+      "title": "Michael Saylor Fans 🙋‍♂️",
+      "description": "Fans of Michael Saylor and his Bitcoin advocacy gather here.",
+      "data": [
+        {
+          "key": "yfowctzs353q6bsyot3ry8ufraos5fbibmcgkg5uo936ox4begwo6hkf8h3xcf4os1ucbupdypiac19e7g81aqr4d345mrg7zce5s1wkntaqbyztao1h58zjnwpd68mychkrm9oentpf4y1354doynbko6qgkye"
+        }
+      ],
+      "keywords": [
+        "Crypto",
+        "Fans"
+      ]
+    },
+    {
+      "name": "reverse-engineering",
+      "title": "Reverse Engineering 🕵️",
+      "description": "Discussion of reverse‑engineering techniques, tools and challenges.",
+      "data": [
+        {
+          "key": "yfo4hrj6jbmzjstfwybybs46sosemfeatg4yoek8murhwux4gzpokhmre3tw3u67ruxhw76ctajp9piquhzznbtymk7g7qmhsnhnsoznpw4p4j7a3cje1kx3wznej3i6t1cfzc9ycw69q88dab3i71zijiqxgye"
+        }
+      ],
+      "keywords": [
+        "Security",
+        "Reverse"
+      ]
+    },
+    {
+      "name": "the-psychedelic-libertarian-repository",
+      "title": "The Psychedelic Libertarian Repository 🍄🗽",
+      "description": "A collection of resources related to psychedelic research and libertarian philosophy.",
+      "data": [
+        {
+          "key": "yfo9he9zctueyhwwqq3n3pguzx71izkoagb9ngymch5isdh9cqhtrfaof8khtkrmyubcy89do6f7ei4y168wweicmcwksrbygqwuom7sayhybfuneodrtiht594ni1nwzdjje45hitbfxmxd131t1nc6xza7"
+        }
+      ],
+      "keywords": [
+        "Psychedelics",
+        "Libertarian"
+      ]
+    },
+    {
+      "name": "macros-economics-discussion",
+      "title": "Macros – economics discussion 📈",
+      "description": "Macroeconomic theory, policy debates and market analysis.",
+      "data": [
+        {
+          "key": "yfo5udj1uj188ij75x9tcadcjzdh9ejoatfg17na7igi3nhtr8tgrq3sh71ntqfpdhumo7jqyyzz9ex3eddbx7kbgg73amwpqkiy337nm7x1ggsmyn75c89ihdar5dmntp1z94d6qo4fcja1ophuc3zs1qcn"
+        }
+      ],
+      "keywords": [
+        "Economics",
+        "Discussion"
+      ]
+    },
+    {
+      "name": "pear-projects-app",
+      "title": "Pear Projects App 📱",
+      "description": "Showcase and discuss Pear‑based projects, apps and demos.",
+      "data": [
+        {
+          "key": "yfo7hteni8jsjp1gut5k19b4ghb3wzyhcpn1fy7ej84yt3nte75hq8jhttxzjhsdx799ydofgdj7n1po9jymtc5pc1iuyrqsgxa5rmqddk39q9f4cxn14iidfamazez7znyhms89jnyqf6xt9hybthpgy1yz"
+        }
+      ],
+      "keywords": [
+        "Projects",
+        "Apps"
+      ]
+    },
+    {
+      "name": "keetopia",
+      "title": "Keetopia 🎉",
+      "description": "A fun, sandbox‑style room for off‑topic conversation and community games.",
+      "data": [
+        {
+          "key": "yfo6715bpzqzruoef1wczfdyis6qwbdsxgmopsxypqo3hmj874u8a9uj5uoosnozpt1auz5xd5cr7noeoscijaybj8zuibqbw4sgwcsxzztjon8xca7n8n87t4thnm3h4zh1g5kgrfqoodatzpmipg41wcwsnx"
+        }
+      ],
+      "keywords": [
+        "Social",
+        "Fun"
+      ]
+    },
+    {
+      "name": "la-piazza-italian-community",
+      "title": "La Piazza 🇮🇹 – Italian community",
+      "description": "Italian‑language room for discussion, help and socialising.",
+      "data": [
+        {
+          "key": "yfowa9fz7uma4gxdoeknpzq94zmhc8z5jtkb71mftjnatf4oojkgkqmihcd5j6ca6w8wszqbngo65yrrinedxajho1eyzb19g4i4ggpozbbjq7ne88cgtah7y7qm95m3ara1ntcd5b45i9bszkxqnedrqzxz"
+        }
+      ],
+      "keywords": [
+        "Italian",
+        "Community"
+      ]
+    },
+    {
+      "name": "keet",
+      "title": "Keet Добро Пожаловать 🌍",
+      "description": "Общественная комната для всего, что связано с Keet & Pears. Пожалуйста, соблюдайте правила сообщества.",
+      "data": [
+        {
+          "key": "nfo19kgumsfx6yebdqhfgn5na9qiw1pcxny1dmzwj1s1tsazsyr9rt1e4arujn3kwe9gc7bgm8pbeiag13c4dmapqi6zzpwaednz9o9odjcoxsupzsopqc46ceyjfses3cw1oghudtgi6x1ifdhj1yc4woosgyed346wfg1paetn1iiuafiethafntfhr"
+        }
+      ],
+      "keywords": [
+        "Official",
+        "Russian",
+        "Community"
+      ]
+    },
+    {
+      "name": "magyar-szoba-hungarian-chat",
+      "title": "Magyar Szoba 🇭🇺 – Hungarian chat 🗣️",
+      "description": "Hungarian‑language room for discussion and community building.",
+      "data": [
+        {
+          "key": "yfoi471wxoki18iur15fx5yrwo1un4z9f3uz5qdaaz1yy5qgdg3ahcwg145f5x959hhwkfpaiogy3ctbh7mm9qyhxkncc7r5syaf6ao3thp5hh34qnkynn5nk8o8oni5ypa83s3foifnob5jt7wihm1aii34eyeroom"
+        }
+      ],
+      "keywords": [
+        "Hungarian",
+        "Chat"
+      ]
+    },
+    {
+      "name": "keet-bienvenido",
+      "title": "Keet Bienvenido 🌍",
+      "description": "Sala comunitaria para todo lo relacionado con Keet y Pears. Por favor, sigue las reglas de uso en la sala de la comunidad. ¡Disfruta!",
+      "data": [
+        {
+          "key": "nfozhdeghdhkmq6pjnot38qehk41tfdk7ezdrzop6eg1kf8j4315eyskw9jb9xaucsh8wekg9m5z3fxcooxf9fggkd9t6d3s4nbpzwnxmaa4jg7ow54kenfw4njk8hqa1jobcfkziiu37egtkq7ge6hdw6bfryedn7xcc9njakfrjraefdt1fgtg3jgcr"
+        }
+      ],
+      "keywords": [
+        "Official",
+        "Community",
+        "Latin",
+        "Spanish",
+        "Español"
+      ]
+    },
+    {
+      "name": "keet-benvenuto",
+      "title": "Keet Benvenuto 🌍",
+      "description": "Sala comune per tutto ciò che riguarda Keet e 'Pears'. Si prega di seguire le regole della comunità.",
+      "data": [
+        {
+          "key": "nfoty8ery1i6q7urd4grpb8jbwu9zs7xitorcg4yypnd3cfzwp16g7cmink6dmr6jqjaodufpojo6x7j45g15sghb1mm1zstk8frdhf97etai3cpujbgmcf7x4mk4jtjun53pohwpspkq6rb6sdgngddahd9kyedwfoz16nkakuich9pjubfj77x6jfcr"
+        }
+      ],
+      "keywords": [
+        "Official",
+        "Community",
+        "Italian"
+      ]
+    },
+    {
+      "name": "keet",
+      "title": "Keet 欢迎/ 歡迎 🌍",
+      "description": "Keet 中文社群/社區.",
+      "data": [
+        {
+          "key": "nfo4epyx159hi9s4abcyqmqf6cx5q5nhiemdr58swhyr1o3pfh8irmetf4kczst45dg9mn5gj4546cntiqdkmn65psbyeitnkorstex3kdg1dadm18ceihpk7q7hd6wyny9oghx4aahnjjcg661yuyom7yzzayedrj5nfb6opjcggy4sj8bewtrubywqg"
+        }
+      ],
+      "keywords": [
+        "Official",
+        "Community",
+        "Chinese",
+        "中文"
+      ]
+    },
+    {
+      "name": "holesail",
+      "title": "Holesail ⛵",
+      "description": "Peer-to-peer proxy for TCP and UDP ports",
+      "data": [
+        {
+          "key": "nfo4of1xqm36up7qaf1un7mfih5on41t33ga8znpwhj67y5gs1zq1j349jqy355t3mnek5ei5rzhfaprbf5rx39amyysda1yyf1ap37cq1za65pke8bypzfweb7b61csberxxwmahybu35qxn3zrsnutqynhyyedoddotqg4isfrjrae911pmwcxn7rhr"
+        }
+      ],
+      "keywords": [
+        "Port",
+        "Proxy"
+      ]
+    },
+    {
+      "name": "ai-music-hub",
+      "title": "AI Music Hub 🎵",
+      "description": "Place for music creators to connect",
+      "data": [
+        {
+          "key": "nfo6fujnc9aatmdfgeopnnp5o3tbijjpznts4n17tip6foeaf9rqyzq6drhto6mxx5pwguge7m7uneaytxfopxgwc5uyuhwx8139boryp8x8iokhqfoknq87wuxguwz6ebb1ucs1o68kpef7hn4ibd3zbi5ynyedrkpnp1i7pkay1gd6n6d3pn8pujfcr"
+        }
+      ],
+      "keywords": [
+        "AI",
+        "Music"
+      ]
+    },
+    {
+      "name": "keety-links-chat",
+      "title": "Keety Links Chat 👥",
+      "description": "Post non-expiry link here to be added to KEETY LINKS",
+      "data": [
+        {
+          "key": "yfo9nkga9abx983cannfe8e46mxmmqx711jwabjoh7ourqo7agdaah9s5yguzef4c9ax18wxwgfwsiqnfmq4rytkwr371eemycu75sscmzqduit8q5h34uda6cg8ntyfys5s4zf31m71xegqa1uoguttxkw1eye"
+        }
+      ],
+      "keywords": [
+        "Keet",
+        "Group"
+      ]
+    },
+    {
+      "name": "pear-pass",
+      "title": "Pear Pass 🔑",
+      "description": "Pear Pass releases and community chat.",
+      "data": [
+        {
+          "key": "nfo48ei19gg1gw8ih3cu8rpw6wc9nstxb56jogzh9asa3nkchdqthjcxdcrtjgettbfnpzxirona5uketw37wjubpsc86qae3y4sayae9ufmh5ooz85rhn6j5ocjmgejw6sh85bsxxut57tafoxrpj8td4txayedtjnjgnnjaetn1iiuafinrkkssq4hg"
+        }
+      ],
+      "keywords": [
+        "password",
+        "identity"
+      ]
+    },
+    {
+      "name": "bitcoin-mining",
+      "title": "Bitcoin Mining ⛏️",
+      "description": "Bitcoin Mining relate discussions.",
+      "data": [
+        {
+          "key": "nfo5pqmsuob539ci7ao4yqz57bm5zdinibt9ppsosmtwyemdche1w4tij3p6fiynsz74saqmjfpjwgac4fef73rrfppde6m1np9qa59hi9o7kuax73r7xs77iy9zfaryn7mg7s5c9ygddcm7qg55o3wc451gnyedrewipc7zpjys34hcj8bftto3itgcr"
+        }
+      ],
+      "keywords": [
+        "Bitcoin",
+        "Mining"
+      ]
+    },
+    {
+      "name": "good-news-community",
+      "title": "Good News Community",
+      "description": "A community for sharing positive news and encouraging stories.",
+      "data": [
+        {
+          "key": "nfouhfk8oj5xd7jt8p3f3d6si16xgeuffnzy99m5zy1s7umpzntgsxcry59dhso9p1wohpmtowmzifbtsg74tox4utufg9c64drj47ohhfcsknap5quu9f8cej4awn3rxbzr77rfkp73ncyeh7c64incbopneyedmbtogi1jakus8urtj8bd7wsgqxoqs"
+        }
+      ],
+      "keywords": [
+        "News",
+        "Community",
+        "Social"
+      ]
+    },
+    {
+      "name": "formula-1-hub",
+      "title": "Formula 1 Hub 🏎️",
+      "description": "The central hub for Formula 1 fans.",
+      "data": [
+        {
+          "key": "nfo4ydjytzwihegus5o9eumj63trm19zgma99396q8a85toq6djneuni1yoaumqozhgpmggexbnnazf5uperi1sc9chsz3krohyyp7ajia7dbas4mteqjpkfcxpnmh68ma15jem8mf1ycbq1ocagfurd1ba4yyedtjnjgnnjaku6sbykjub8j1ssthe1q"
+        }
+      ],
+      "keywords": [
+        "Sports",
+        "F1",
+        "Racing"
+      ]
+    }
+  ]
+}

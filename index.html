@@ -698,11 +698,24 @@
 
         async function loadRooms() {
             try {
-                const response = await fetch('room.json');
+                const response = await fetch('datapackage.json');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                rooms = await response.json();
+                const data = await response.json();
+
+                if (data && Array.isArray(data.resources)) {
+                    rooms = data.resources.map(r => ({
+                        name: r.title || r.name || '',
+                        description: r.description || '',
+                        tags: r.keywords || [],
+                        key: r.data && r.data.length > 0 ? r.data[0].key : ''
+                    })).filter(r => r.key);
+                } else if (Array.isArray(data)) {
+                    rooms = data;
+                } else {
+                    rooms = [];
+                }
                 console.log('Rooms loaded successfully:', rooms.length, 'rooms');
             } catch (error) {
                 console.error('Error loading rooms:', error);

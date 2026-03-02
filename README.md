@@ -71,7 +71,7 @@ https://gasolin.idv.tw/keetlink/#customroomkey&title=My%20Custom%20Group
 Want to host your own Keet groups directory?
 
 1. Fork this repository
-2. Modify the `room.json` file to include your groups
+2. Modify the `datapackage.json` file to include your groups
 3. Deploy to any static hosting platform (GitHub Pages, Netlify, Vercel, etc.)
 
 ### Adding New Groups
@@ -79,22 +79,28 @@ Want to host your own Keet groups directory?
 To add a new group to this directory, you can:
 
 1. Join [Keety Links Chat](https://gasolin.idv.tw/keetlink/#yfo9nkga9abx983cannfe8e46mxmmqx711jwabjoh7ourqo7agdaah9s5yguzef4c9ax18wxwgfwsiqnfmq4rytkwr371eemycu75sscmzqduit8q5h34uda6cg8ntyfys5s4zf31m71xegqa1uoguttxkw1eye) and follow the instructions to post the non-expiry link there.
-2. Or, update the `room.json` file manually:
+2. Or, update the `datapackage.json` file manually:
 
 ```json
 {
-    "name": "Your Group Name",
-    "description": "Brief description of your group",
-    "key": "your-room-key-here",
-    "tags": ["Tag1", "Tag2", "Tag3"]
+    "name": "qvac-workbench-dev",
+    "title": "QVAC Workbench Dev 🛠️",
+    "description": "A developer‑focused room for building and testing QVAC workbenches.",
+    "data": [
+        {
+            "key": "nfotu398boebrse8udixr6sbzwnozbq99diquyq8n3h4uw6a8br41yya7ri333xtp61fucazyjmgaomjwqdjwhn3yi1iwb9bcfudeqfyq6j4wpmuyqayd4bqcsrg1h8n6n88qae9d97ck81j9nd39p6ksmbuayedtjnjgnnjajc3g5sej8bfoaadk3sqk"
+        }
+    ],
+    "keywords": ["Dev", "QVAC"]
 }
 ```
 
 **Data Structure:**
-- **name**: Display name of the group
+- **name**: identifier of the group
+- **title**: Display title of the group
 - **description**: Brief overview of the group's purpose  
-- **key**: Unique identifier for joining the group
-- **tags**: Array of categories for easy filtering
+- **data.key**: Unique identifier for joining the group
+- **keywords**: Array of categories for easy filtering
 
 ## 🛠️ Technical Details
 
