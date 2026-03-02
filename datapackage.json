@@ -911,6 +911,20 @@
         "F1",
         "Racing"
       ]
+    },
+    {
+      "name": "cupido-club-lobby",
+      "title": "Cupido Club Lobby 💋",
+      "description": "The SFW entrance to a NSFW place.",
+      "data": [
+        {
+          "key": "nfo3arrfx68zk8jxmrdpdddhqrd1e78koa5tz3c44n1tqr4n8mq7yng5bnxbs3mjdmkdj4yaa3j5qc9oqkssdea54a7xzr9hm7hr3yy53pz7hh88xedo88366fnk388netdsdrzqxx8iiaaxesaidchymfb9cyedw9ioen1caj4ciiwxnruim3rjx7rhr"
+        }
+      ],
+      "keywords": [
+        "NSFW",
+        "Adult"
+      ]
     }
   ]
 }
