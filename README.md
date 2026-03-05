@@ -64,7 +64,7 @@ https://gasolin.idv.tw/keetlink/#yfo4afrc46rkykdue9br5zsiyc917eqqpr9oiy8z19xrfj9
 https://gasolin.idv.tw/keetlink/#customroomkey&title=My%20Custom%20Group
 ```
 
-**Note**: Groups not in the official catalog will display "This Group does not in catalog" in the tags section.
+**Note**: Groups not in the official catalog will display "This Group is not in catalog" in description and show no tags.
 
 ## 🏠 Self-Hosting
 
