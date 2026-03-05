@@ -930,6 +930,11 @@
                 backToList();
             }
 
+            // Update URL with ?tag= parameter
+            const url = new URL(window.location);
+            url.searchParams.set('tag', tag);
+            window.history.pushState({}, '', url);
+
             // Set search input to the tag and trigger search
             searchInput.value = tag;
             updateSearchClearButton();
@@ -940,6 +945,11 @@
             searchInput.value = '';
             updateSearchClearButton();
             renderRooms('');
+
+            // Remove ?tag= from URL
+            const url = new URL(window.location);
+            url.searchParams.delete('tag');
+            window.history.pushState({}, '', url.pathname + url.search + url.hash);
         }
 
         function updateSearchClearButton() {
@@ -953,8 +963,10 @@
         function backToList() {
             currentSelectedRoom = null;
 
-            // Clear URL hash and query parameters
-            window.history.pushState("", document.title, window.location.pathname + window.location.search);
+            // Clear URL hash but preserve ?tag= if present
+            const url = new URL(window.location);
+            url.hash = '';
+            window.history.pushState("", document.title, url.pathname + url.search);
 
             // Show list view and hide detail view
             container.style.display = 'grid';
@@ -1088,7 +1100,18 @@
         // Initialize the app
         async function initializeApp() {
             await loadRooms();
-            renderRooms();
+
+            // Check for ?tag= query parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const tagParam = urlParams.get('tag');
+            if (tagParam) {
+                searchInput.value = tagParam;
+                updateSearchClearButton();
+                renderRooms(tagParam);
+            } else {
+                renderRooms();
+            }
+
             handleHashChange();
             setDownloadLink(); // Initialize the link for the first time
         }

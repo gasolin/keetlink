@@ -11,7 +11,7 @@ Visit [https://gasolin.idv.tw/keetlink/](https://gasolin.idv.tw/keetlink/) to br
 - **🔍 Smart Search**: Find groups by name, tags, or description
 - **📱 Responsive Design**: Works perfectly on desktop and mobile devices
 - **🎨 Modern UI**: Dark theme with gradient accents and smooth animations
-- **🏷️ Tag System**: Click tags to quickly filter related groups
+- **🏷️ Tag System**: Click tags to quickly filter related groups, with shareable tag URLs
 - **📱 QR Code Support**: Scan QR codes to join groups instantly
 - **🔗 Direct Links**: Generate shareable links for any group
 - **🌐 Dynamic URL Support**: Support for custom room keys and titles
@@ -55,6 +55,11 @@ https://gasolin.idv.tw/keetlink/#{room_key}
 https://gasolin.idv.tw/keetlink/#{room_key}&title={room_title}
 ```
 
+**Filter by tag:**
+```
+https://gasolin.idv.tw/keetlink/?tag={tag_name}
+```
+
 **Examples:**
 ```
 # Catalog group
@@ -62,6 +67,10 @@ https://gasolin.idv.tw/keetlink/#yfo4afrc46rkykdue9br5zsiyc917eqqpr9oiy8z19xrfj9
 
 # Custom group with title
 https://gasolin.idv.tw/keetlink/#customroomkey&title=My%20Custom%20Group
+
+# Filter by tag
+https://gasolin.idv.tw/keetlink/?tag=Official
+https://gasolin.idv.tw/keetlink/?tag=Dev
 ```
 
 **Note**: Groups not in the official catalog will display "This Group is not in catalog" in description and show a `Dynamic URL` tag.
