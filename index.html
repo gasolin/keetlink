@@ -802,7 +802,7 @@
             const tagsContainer = document.getElementById('detailRoomTags');
             if (room.isTemporary) {
                 // For temporary rooms, show non-clickable tag with orange background
-                tagsContainer.innerHTML = `<span class="tag" style="cursor: default; color: #ff9800">This Group does not in catalog</span>`;
+                tagsContainer.innerHTML = `<span class="tag" style="cursor: default; color: #ff9800">Dynamic URL</span>`;
             } else {
                 tagsContainer.innerHTML = room.tags.map(tag => `<span class="tag" onclick="event.stopPropagation(); searchByTag('${tag}')">${tag}</span>`).join('');
             }
