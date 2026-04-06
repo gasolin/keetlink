@@ -297,21 +297,21 @@
             box-shadow: 0 10px 25px rgba(70, 227, 214, 0.3);
         }
 
-        .btn-join-group.build-int {
+        .btn-join-group.build-internal {
             background: linear-gradient(90deg, #ffd700 0%, #ffed4e 100%);
             color: #333;
         }
 
-        .btn-join-group.build-int:hover {
+        .btn-join-group.build-internal:hover {
             box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
         }
 
-        .btn-join-group.build-exp {
+        .btn-join-group.build-nightly {
             background: linear-gradient(90deg, #00ff00 0%, #32cd32 100%);
             color: #fff;
         }
 
-        .btn-join-group.build-exp:hover {
+        .btn-join-group.build-nightly:hover {
             box-shadow: 0 10px 25px rgba(0, 255, 0, 0.3);
         }
 
@@ -812,11 +812,11 @@
 
             if (queryParams && queryParams.build) {
                 switch (queryParams.build) {
-                    case 'int':
-                        joinLink = `pearint://keet/${room.key}`;
+                    case 'internal':
+                        joinLink = `pear-internal://keet/${room.key}`;
                         break;
-                    case 'exp':
-                        joinLink = `pearexp://keet/${room.key}`;
+                    case 'nightly':
+                        joinLink = `pear-nightly://keet/${room.key}`;
                         break;
                     default:
                         // Keep original pear:// for invalid build values
@@ -830,15 +830,15 @@
             // Update button styling based on build parameter
             const joinButton = document.getElementById('joinLink');
             // Remove any existing build classes
-            joinButton.classList.remove('build-int', 'build-exp');
+            joinButton.classList.remove('build-internal', 'build-nightly');
 
             if (queryParams && queryParams.build) {
                 switch (queryParams.build) {
-                    case 'int':
-                        joinButton.classList.add('build-int');
+                    case 'internal':
+                        joinButton.classList.add('build-internal');
                         break;
-                    case 'exp':
-                        joinButton.classList.add('build-exp');
+                    case 'nightly':
+                        joinButton.classList.add('build-nightly');
                         break;
                     default:
                         // Keep default styling for invalid build values
