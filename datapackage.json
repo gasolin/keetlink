@@ -926,6 +926,40 @@
         "Hindi",
         "Community"
       ]
+    },
+    {
+      "name": "tether-wallet",
+      "title": "Tether Wallet Support",
+      "description": "Tether Wallet Support and Feedback",
+      "data": [
+        {
+          "key": "nfo4y5g3zd4k759bs6ua6ddxrsuzdkxjziy7e8p6es73q1z9osz1oxdtiiuf87kpeeayinxrgkdw7754oisoc1m1bdwi3o1z85ucb7ht4ixx88yhknqp8xi8q8zwy9htp1zz5m64my1yfzunb7fqfk68ux4fkyedw7th3rkmaetbrojwj8bm3john1dhy"
+        }
+      ],
+      "keywords": [
+        "Official",
+        "Tether",
+        "Wallet",
+        "Support"
+      ]
+    },
+    {
+      "name": "tether-wallet-release",
+      "title": "Tether Wallet Release",
+      "description": "Tether Wallet Support and Feedback",
+      "data": [
+        {
+          "key": "nfo9ezhsytu7y6fkrxktc88me8du9coa1z8m3o9rcyuj73jwfmimg6xomop3jok4c9ex79t8qd19grhm6oh1wnms9p79ch943fwpienbwg5tgxpned1e3g6fzs53oi5xpgooy34ccpezt3x8m9azepsxxux3hyed14rq5gt9zs6kc8ywa4d7njzertrhr"
+        }
+      ],
+      "keywords": [
+        "Official",
+        "Tether",
+        "Wallet",
+        "APK",
+        "Android",
+        "Download",
+      ]
     }
   ]
 }
