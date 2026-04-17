@@ -960,6 +960,22 @@
         "Android",
         "Download"
       ]
+    },
+    {
+      "name": "interslavic",
+      "title": "Interslavic",
+      "description": "Interslavic is an auxiliary language to facilitate communication between speakers of Slavic languages.",
+      "data": [
+        {
+          "key": "nfo4sqsyze6eaecowyxu3ihp7qg89geo7rzry44douwhbd4swug8c1k1mi9c6rjmzhtirzgxuhsazc7f66dcf5s596pee3nobqpru4bs3ahkasas1fuxd8rwdp1pyzyi3qfoyqsxymwzbu9t3uyfstdqkuuwcyed1bg8cnjg1gdcxmbejxbnr7t8uzgsw"
+        }
+      ],
+      "keywords": [
+        "community",
+        "culture",
+        "language",
+        "Slavic"
+      ]
     }
   ]
 }
