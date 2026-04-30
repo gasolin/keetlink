@@ -16,20 +16,6 @@
   "x-type": "keet/room-pack",
   "resources": [
     {
-      "name": "qvac-workbench-dev",
-      "title": "QVAC Workbench Dev 🛠️",
-      "description": "A developer‑focused room for building and testing QVAC workbenches.",
-      "data": [
-        {
-          "key": "nfotu398boebrse8udixr6sbzwnozbq99diquyq8n3h4uw6a8br41yya7ri333xtp61fucazyjmgaomjwqdjwhn3yi1iwb9bcfudeqfyq6j4wpmuyqayd4bqcsrg1h8n6n88qae9d97ck81j9nd39p6ksmbuayedtjnjgnnjajc3g5sej8bfoaadk3sqk"
-        }
-      ],
-      "keywords": [
-        "Dev",
-        "QVAC"
-      ]
-    },
-    {
       "name": "pear-school",
       "title": "Pear School 🎓",
       "description": "A classroom‑style room where newcomers can learn how to code using the Pear runtime.",
