@@ -808,18 +808,18 @@
             }
 
             // Generate join link with build parameter support
-            let joinLink = `pear://keet/${room.key}`;
+            let joinLink = `keet://keet/${room.key}`;
 
             if (queryParams && queryParams.build) {
                 switch (queryParams.build) {
                     case 'internal':
-                        joinLink = `pear-internal://keet/${room.key}`;
+                        joinLink = `keet-internal://keet/${room.key}`;
                         break;
                     case 'nightly':
-                        joinLink = `pear-nightly://keet/${room.key}`;
+                        joinLink = `keet-nightly://keet/${room.key}`;
                         break;
                     default:
-                        // Keep original pear:// for invalid build values
+                        // Keep original keet:// for invalid build values
                         break;
                 }
             }
