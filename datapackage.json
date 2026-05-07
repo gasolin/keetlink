@@ -948,6 +948,20 @@
         "language",
         "Slavic"
       ]
+    },
+    {
+      "name": "just-banter",
+      "title": "Just Banter",
+      "description": "No direction, no agenda, just banter. Come hang.",
+      "data": [
+        {
+          "key": "nfooc78haue5gz9zxnptas8wofspcapinuwmzo8a8iaeubciw3m9r34zinknmcc7d6jiksdzdxxa8b9nwho7xasc6n5nitdsqpwq5n7bymh7du6xym8jh11ttekkq9445brwibs731kuis9scg89u8a6cnjqhyederk6cub7san1ghujjmbnr7t8us5gw"
+        }
+      ],
+      "keywords": [
+        "banter",
+        "chat"
+      ]
     }
   ]
 }
